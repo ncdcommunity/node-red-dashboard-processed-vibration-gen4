@@ -7,8 +7,8 @@
         "category": "NCD",
         "in": [
             {
-                "x": 100,
-                "y": 840,
+                "x": 40,
+                "y": 920,
                 "wires": [
                     {
                         "id": "81f334edf28ccfec"
@@ -503,7 +503,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 4,
-        "x": 430,
+        "x": 350,
         "y": 840,
         "wires": [
             [
@@ -524,6 +524,7 @@
         "id": "815e8570935e413a",
         "type": "function",
         "z": "74f0f072aba2913a",
+        "d": true,
         "name": "type-error",
         "func": "msg.payload = ({fill: \"red\",text:\"Sensor type not supported\"});\nreturn msg;",
         "outputs": 1,
@@ -532,7 +533,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
+        "x": 520,
         "y": 880,
         "wires": [
             [
@@ -549,7 +550,7 @@
         "links": [
             "94c148c092e118c9"
         ],
-        "x": 715,
+        "x": 615,
         "y": 880,
         "wires": []
     },
@@ -820,7 +821,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 230,
+        "x": 150,
         "y": 840,
         "wires": [
             [
@@ -2019,20 +2020,20 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 640,
+        "x": 540,
         "y": 820,
         "wires": [
             [
                 "f3f150191c9f2b62",
-                "4f91024b6433be37"
+                "a595391117fc41d3"
             ],
             [
                 "f3f150191c9f2b62",
-                "4f91024b6433be37"
+                "a595391117fc41d3"
             ],
             [
                 "f3f150191c9f2b62",
-                "4f91024b6433be37"
+                "a595391117fc41d3"
             ]
         ]
     },
@@ -2442,7 +2443,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "1d5cbe707db86244",
         "name": "vpBatteryChart",
-        "label": "BATTERY PERCENTAGE",
+        "label": "BATTERY PERCENTAGE [%]",
         "order": 1,
         "chartType": "line",
         "category": "Battery",
@@ -2466,8 +2467,8 @@
         "pointShape": "circle",
         "pointRadius": "4",
         "showLegend": false,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#ffffff",
@@ -2609,7 +2610,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "ad7531e06b2c6dc8",
         "name": "vpTempChart",
-        "label": "TEMPERATURE",
+        "label": "TEMPERATURE [°C]",
         "order": 1,
         "chartType": "line",
         "category": "Temperature",
@@ -2633,8 +2634,8 @@
         "pointShape": "circle",
         "pointRadius": "4",
         "showLegend": false,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#ffffff",
@@ -2695,7 +2696,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "871f947c6bf37ced",
         "name": "RMS (G)",
-        "label": "RMS Acceleration (G)",
+        "label": "RMS Acceleration [G]",
         "order": 1,
         "chartType": "line",
         "category": "[\"x_axis\",\"y_axis\",\"z_axis\"]",
@@ -2719,8 +2720,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#2095f2",
@@ -2758,7 +2759,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "ee40546169cc4f6e",
         "name": "X - Velocity (mm/sec) ",
-        "label": "X - Velocity (mm/sec) ",
+        "label": "X - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -2782,8 +2783,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#2ca02c",
@@ -2821,7 +2822,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "e080ce6faa9dafc1",
         "name": "X - Displacement (mm)",
-        "label": "X - Displacement (mm)",
+        "label": "X - Displacement [mm]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -2845,8 +2846,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#ff9694",
@@ -2884,7 +2885,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "2e65c7c2db11a067",
         "name": "MAX (G)",
-        "label": "MAX Acceleration (G)",
+        "label": "MAX Acceleration [G]",
         "order": 1,
         "chartType": "line",
         "category": "[\"x_axis\",\"y_axis\",\"z_axis\"]",
@@ -2908,8 +2909,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#2095f2",
@@ -2947,7 +2948,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "ac28f055e2a68798",
         "name": "Y - Velocity (mm/sec)",
-        "label": "Y - Velocity (mm/sec)",
+        "label": "Y - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -2971,8 +2972,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#98df8a",
@@ -3010,7 +3011,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "7799c09456a3cd22",
         "name": "Y - Displacement (mm)",
-        "label": "Y - Displacement (mm)",
+        "label": "Y - Displacement [mm]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -3034,8 +3035,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#9467bd",
@@ -3073,7 +3074,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "b41a37f94361e78b",
         "name": "PEAK (Hz)",
-        "label": "Amplitude Peak (Hz)",
+        "label": "Amplitude Peak [Hz]",
         "order": 1,
         "chartType": "line",
         "category": "[\"x1\",\"y1\",\"z1\",\"x2\",\"y2\",\"z2\",\"x3\",\"y3\",\"z3\"]",
@@ -3097,8 +3098,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#2095f2",
@@ -3136,7 +3137,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "bd2d49356e4ffaa7",
         "name": "Z - Velocity (mm/sec)",
-        "label": "Z - Velocity (mm/sec)",
+        "label": "Z - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -3160,8 +3161,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#d62728",
@@ -3199,7 +3200,7 @@
         "g": "33cfbcff7312a6e6",
         "group": "9351763853fe951d",
         "name": "Z - Displacement (mm)",
-        "label": "Z - Displacement (mm)",
+        "label": "Z - Displacement [mm]",
         "order": 1,
         "chartType": "line",
         "category": "",
@@ -3223,8 +3224,8 @@
         "pointShape": "circle",
         "pointRadius": "2",
         "showLegend": true,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#c5b0d5",
@@ -3751,8 +3752,8 @@
         "pointShape": "circle",
         "pointRadius": "4",
         "showLegend": false,
-        "removeOlder": "20",
-        "removeOlderUnit": "60",
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
         "removeOlderPoints": "20",
         "colors": [
             "#ffffff",
@@ -7378,6 +7379,26 @@
         "x": 700,
         "y": 660,
         "wires": []
+    },
+    {
+        "id": "a595391117fc41d3",
+        "type": "function",
+        "z": "74f0f072aba2913a",
+        "name": "rssi-validator",
+        "func": "if(!msg.payload.hasOwnProperty(\"rssi\")){\n    msg.payload.rssi = '--';\n    return msg;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 860,
+        "wires": [
+            [
+                "4f91024b6433be37"
+            ]
+        ]
     },
     {
         "id": "108b08b06e2d677a",
