@@ -1549,8 +1549,7 @@
         "name": "link in 88",
         "links": [
             "9df5f842d86ebdc3",
-            "bf4b9d24d246aee3",
-            "c88623bc3aaf9ccc"
+            "bf4b9d24d246aee3"
         ],
         "x": 4055,
         "y": 740,
@@ -1567,8 +1566,7 @@
         "g": "33cfbcff7312a6e6",
         "name": "link in 89",
         "links": [
-            "6debd157575965a5",
-            "ac714a765f179d11"
+            "6debd157575965a5"
         ],
         "x": 4335,
         "y": 860,
@@ -1621,7 +1619,9 @@
         "className": "gen4gauge",
         "x": 4200,
         "y": 740,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "7bf4dc27d4be6b51",
@@ -1695,8 +1695,7 @@
         "links": [
             "b4423746c771e773",
             "bf4b9d24d246aee3",
-            "c76fe27ccb6fd037",
-            "fe9bb4c212b0f8bf"
+            "c76fe27ccb6fd037"
         ],
         "x": 3575,
         "y": 820,
@@ -1760,7 +1759,6 @@
         "g": "33cfbcff7312a6e6",
         "name": "link in 94",
         "links": [
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 4335,
@@ -2451,7 +2449,6 @@
         "links": [
             "c76fe27ccb6fd037",
             "bf4b9d24d246aee3",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 4055,
@@ -2471,7 +2468,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3375,
@@ -2491,7 +2487,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3375,
@@ -2511,7 +2506,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3375,
@@ -2531,7 +2525,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3885,
@@ -2551,7 +2544,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3885,
@@ -2571,7 +2563,6 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3885,
@@ -2591,8 +2582,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75",
-            "66b762d45a553a0d"
+            "3633e7dbbd2ffc75"
         ],
         "x": 4385,
         "y": 940,
@@ -2611,8 +2601,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75",
-            "66b762d45a553a0d"
+            "3633e7dbbd2ffc75"
         ],
         "x": 4385,
         "y": 1000,
@@ -2631,8 +2620,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75",
-            "66b762d45a553a0d"
+            "3633e7dbbd2ffc75"
         ],
         "x": 4385,
         "y": 1060,
@@ -2713,7 +2701,9 @@
         "className": "",
         "x": 4540,
         "y": 820,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "0118f7252fb24937",
@@ -2724,8 +2714,7 @@
         "links": [
             "26b4fc05865922dd",
             "bf4b9d24d246aee3",
-            "c76fe27ccb6fd037",
-            "5071fd5ed7fa9a6a"
+            "c76fe27ccb6fd037"
         ],
         "x": 3795,
         "y": 740,
@@ -2767,8 +2756,7 @@
         "links": [
             "a9d622a6c42ef80a",
             "bf4b9d24d246aee3",
-            "c76fe27ccb6fd037",
-            "8463541aae20237d"
+            "c76fe27ccb6fd037"
         ],
         "x": 3575,
         "y": 780,
@@ -2810,8 +2798,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "8320c380dd9804d0",
-            "0e24b50fbb2cb982"
+            "8320c380dd9804d0"
         ],
         "x": 3375,
         "y": 740,
@@ -2853,8 +2840,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "33431c4097ac272a",
-            "ac54aba9493fe329"
+            "33431c4097ac272a"
         ],
         "x": 3375,
         "y": 780,
@@ -2896,7 +2882,6 @@
         "links": [
             "c76fe27ccb6fd037",
             "bf4b9d24d246aee3",
-            "66b762d45a553a0d",
             "3633e7dbbd2ffc75"
         ],
         "x": 3795,
@@ -2979,8 +2964,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3cf38206548a9938",
-            "781a8aa43ea3bdab"
+            "3cf38206548a9938"
         ],
         "x": 3375,
         "y": 820,
@@ -3022,8 +3006,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "1b46a0ab341a9aef",
-            "f8c9bdb3dc8661f2"
+            "1b46a0ab341a9aef"
         ],
         "x": 3375,
         "y": 860,
@@ -3065,8 +3048,7 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "97a68286ef75b23c",
-            "e558fa515eec4857"
+            "97a68286ef75b23c"
         ],
         "x": 3575,
         "y": 740,
@@ -4104,14 +4086,22 @@
                 "t": "eq",
                 "v": "FLY",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OTF",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 470,
         "y": 400,
         "wires": [
+            [
+                "e454d9aadc999567"
+            ],
             [
                 "e454d9aadc999567"
             ]
@@ -5504,10 +5494,18 @@
     {
         "id": "e1296919e93ce7a9",
         "type": "subflow:74f0f072aba2913a",
-        "z": "9c8db6ea98c9b73e",
+        "z": "8d6c340fe8b3848d",
         "name": "",
-        "x": 1120,
-        "y": 340,
+        "x": 520,
+        "y": 160,
         "wires": []
+    },
+    {
+        "id": "490bdc529fea13db",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.26.0"
+        }
     }
 ]
