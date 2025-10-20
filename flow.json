@@ -67,8 +67,8 @@
         "links": [
             "90e6192d9b4e41a2"
         ],
-        "x": 3015,
-        "y": 740,
+        "x": 3035,
+        "y": 940,
         "wires": []
     },
     {
@@ -379,27 +379,26 @@
         "type": "function",
         "z": "74f0f072aba2913a",
         "name": "last(n)Items",
-        "func": "\n\n// const min_time = flow.get(\"min_time\") || null; // Example minimum timestamp\n// const max_time = flow.get(\"max_time\") || null; // Example maximum timestamp\n\nconst min_time = msg.min_time;\nconst max_time = msg.max_time;\nlet array = msg.payload;\n\nif(min_time && max_time){\n    // Check if msg.payload exists and is an array.\n    if (Array.isArray(msg.payload)) {\n        // Use the .filter() method to create a new array containing only the items\n        // that satisfy the condition.\n        msg.payload = msg.payload.filter(item => {\n            // Check if the 'received' property exists and is a number.\n            // This prevents errors if the property is missing or has an unexpected type.\n            if (typeof item.col33 === 'number') {\n                // Check if the 'received' timestamp is within the defined range (inclusive).\n                return item.col33 >= min_time && item.col33 <= max_time;\n            } else {\n                // Log a warning if 'received' property is missing or not a number.\n                // These items will be excluded from the filtered array.\n                node.warn(`Item skipped: 'received' property missing or not a number in object: ${JSON.stringify(item)}`);\n                return false; // Exclude this item from the filtered array\n            }\n        });\n        array = msg.payload;\n    } else {\n        // If msg.payload is not an array, log a warning and return the original message.\n        node.warn(\"msg.payload is not an array or is missing. No filtering performed.\");\n    }\n} else {\n    msg.payload = msg.payload.slice(-20);\n}\n\nlet msg2 = {}\nmsg2.payload = array[array.length - 1];\nif(!msg2.payload){\n    msg2.payload = {\n        'col33' : '--',\n        'col2' : '--',\n        'col6' : '--',\n        'col32' : '--',\n        'col4' : '--',\n        'col7' : '--',\n        'col8' : '--',\n        'col31': '--',\n        'col9': '--',\n        'col3': '--'\n    }\n}\nreturn [msg2, msg];\n\n// if(msg.toGauges){\n//     return [msg2, msg];\n// }\n// else {\n//     return [null, msg];\n// }",
+        "func": "const min_time = msg.min_time;\nconst max_time = msg.max_time;\nlet array = msg.payload;\n\nif(min_time && max_time){\n    // Check if msg.payload exists and is an array.\n    if (Array.isArray(msg.payload)) {\n        // Use the .filter() method to create a new array containing only the items\n        // that satisfy the condition.\n        msg.payload = msg.payload.filter(item => {\n            if(item.col5 == 111){\n                // Check if the 'received' property exists and is a number.\n                // This prevents errors if the property is missing or has an unexpected type.\n                if (typeof item.col57 === 'number') {\n                    // Check if the 'received' timestamp is within the defined range (inclusive).\n                    return item.col57 >= min_time && item.col57 <= max_time;\n                } else {\n                    // Log a warning if 'received' property is missing or not a number.\n                    // These items will be excluded from the filtered array.\n                    node.warn(`Item skipped: 'received' property missing or not a number in object`);\n                    return false; // Exclude this item from the filtered array\n                }\n            } else { \n                // Check if the 'received' property exists and is a number.\n                // This prevents errors if the property is missing or has an unexpected type.\n                if (typeof item.col33 === 'number') {\n                    // Check if the 'received' timestamp is within the defined range (inclusive).\n                    return item.col33 >= min_time && item.col33 <= max_time;\n                } else {\n                    // Log a warning if 'received' property is missing or not a number.\n                    // These items will be excluded from the filtered array.\n                    node.warn(`Item skipped: 'received' property missing or not a number in object`);\n                    return false; // Exclude this item from the filtered array\n                }\n            }\n        });\n        array = msg.payload;\n    } else {\n        // If msg.payload is not an array, log a warning and return the original message.\n        node.warn(\"msg.payload is not an array or is missing. No filtering performed.\");\n    }\n} else {\n    msg.payload = msg.payload.slice(-20);\n}\n\nlet msg2 = {}\nmsg2.payload = array[array.length - 1];\nif(!msg2.payload){\n    msg2.payload = {\n        'col33' : '--',\n        'col2' : '--',\n        'col6' : '--',\n        'col32' : '--',\n        'col4' : '--',\n        'col7' : '--',\n        'col8' : '--',\n        'col31': '--',\n        'col9': '--',\n        'col3': '--',\n        'col10': '--',\n        'col57': '--'\n    }\n}\nreturn [msg2, msg];",
         "outputs": 2,
         "timeout": "0",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2640,
+        "x": 2650,
         "y": 800,
         "wires": [
             [
                 "27dd3e85f30944eb",
                 "18e24138033e4a83",
-                "5d4d25aed1553016",
                 "1a58b07348549329",
                 "22e1d48c9d31e211",
                 "520965335993794e",
                 "3ee7be6cba98112e",
                 "bfa1413b790ba737",
                 "b30913fcb777b369",
-                "b66f017a24d49bf7"
+                "f6f492c6fdb8c5d6"
             ],
             [
                 "3173eb792d02a28b"
@@ -441,7 +440,7 @@
         "to": "",
         "reg": false,
         "x": 2910,
-        "y": 780,
+        "y": 980,
         "wires": [
             [
                 "6debd157575965a5"
@@ -548,8 +547,8 @@
         "links": [
             "5c1edfa7f95b7f70"
         ],
-        "x": 3015,
-        "y": 780,
+        "x": 3035,
+        "y": 980,
         "wires": []
     },
     {
@@ -874,7 +873,8 @@
         "wires": [
             [
                 "eac3342a63c9c339",
-                "ee0ebbda7a2848c3"
+                "ee0ebbda7a2848c3",
+                "3d5e816cc686e2cc"
             ]
         ]
     },
@@ -955,7 +955,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col9",
+                "to": "payload.col10",
                 "tot": "msg"
             }
         ],
@@ -965,7 +965,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 740,
+        "y": 940,
         "wires": [
             [
                 "9df5f842d86ebdc3"
@@ -982,7 +982,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col8",
+                "to": "payload.col9",
                 "tot": "msg"
             }
         ],
@@ -992,7 +992,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 700,
+        "y": 580,
         "wires": [
             [
                 "b4423746c771e773"
@@ -1008,8 +1008,8 @@
         "links": [
             "bcab298ef595f49d"
         ],
-        "x": 3015,
-        "y": 700,
+        "x": 3035,
+        "y": 580,
         "wires": []
     },
     {
@@ -1069,7 +1069,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col31",
+                "to": "payload.col32",
                 "tot": "msg"
             }
         ],
@@ -1079,7 +1079,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 660,
+        "y": 900,
         "wires": [
             [
                 "26b4fc05865922dd"
@@ -1095,8 +1095,8 @@
         "links": [
             "0118f7252fb24937"
         ],
-        "x": 3015,
-        "y": 660,
+        "x": 3035,
+        "y": 900,
         "wires": []
     },
     {
@@ -1109,7 +1109,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col7",
+                "to": "payload.col8",
                 "tot": "msg"
             }
         ],
@@ -1119,7 +1119,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 620,
+        "y": 860,
         "wires": [
             [
                 "a9d622a6c42ef80a"
@@ -1135,8 +1135,8 @@
         "links": [
             "0fb457a2a3f0c955"
         ],
-        "x": 3015,
-        "y": 620,
+        "x": 3035,
+        "y": 860,
         "wires": []
     },
     {
@@ -1159,7 +1159,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 580,
+        "y": 820,
         "wires": [
             [
                 "33431c4097ac272a"
@@ -1175,8 +1175,8 @@
         "links": [
             "6e9426aa42863fcd"
         ],
-        "x": 3015,
-        "y": 580,
+        "x": 3035,
+        "y": 820,
         "wires": []
     },
     {
@@ -1189,7 +1189,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col32",
+                "to": "payload.col6",
                 "tot": "msg"
             }
         ],
@@ -1199,7 +1199,7 @@
         "to": "",
         "reg": false,
         "x": 2890,
-        "y": 540,
+        "y": 780,
         "wires": [
             [
                 "8320c380dd9804d0"
@@ -1215,8 +1215,8 @@
         "links": [
             "ac0d3e8a624161e5"
         ],
-        "x": 3015,
-        "y": 540,
+        "x": 3035,
+        "y": 780,
         "wires": []
     },
     {
@@ -1229,7 +1229,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.col6",
+                "to": "payload.col7",
                 "tot": "msg"
             }
         ],
@@ -1239,7 +1239,7 @@
         "to": "",
         "reg": false,
         "x": 2900,
-        "y": 500,
+        "y": 740,
         "wires": [
             [
                 "3cf38206548a9938"
@@ -1255,8 +1255,8 @@
         "links": [
             "8a24745d274dca8b"
         ],
-        "x": 3015,
-        "y": 500,
+        "x": 3035,
+        "y": 740,
         "wires": []
     },
     {
@@ -1279,7 +1279,7 @@
         "to": "",
         "reg": false,
         "x": 2910,
-        "y": 460,
+        "y": 700,
         "wires": [
             [
                 "1b46a0ab341a9aef"
@@ -1295,8 +1295,8 @@
         "links": [
             "b54a9e20f8d9a5ae"
         ],
-        "x": 3015,
-        "y": 460,
+        "x": 3035,
+        "y": 700,
         "wires": []
     },
     {
@@ -1416,7 +1416,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "$moment(payload.col33).format(\"yyyy-MM-dd HH:mm:ss\")",
+                "to": "$moment(payload.col57).format(\"yyyy-MM-dd HH:mm:ss\")",
                 "tot": "jsonata"
             }
         ],
@@ -1425,8 +1425,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2900,
-        "y": 420,
+        "x": 2920,
+        "y": 460,
         "wires": [
             [
                 "97a68286ef75b23c"
@@ -1442,8 +1442,8 @@
         "links": [
             "e9a6e04941f9686d"
         ],
-        "x": 3015,
-        "y": 420,
+        "x": 3035,
+        "y": 440,
         "wires": []
     },
     {
@@ -1451,7 +1451,7 @@
         "type": "function",
         "z": "74f0f072aba2913a",
         "name": "probe-validator",
-        "func": "let type = flow.get(\"type_114\");\nif(type == 110 || type == 114){\n    msg = {};\n    msg.ui_update = { \n        \"label\": \"\"\n    }\n    msg.enabled = false;\n    return msg;\n} else if(type == 111){\n    let probe = flow.get(\"probe\");\n    msg = {};\n    msg.ui_update = { \n        \"label\": probe\n    }\n\n    msg.enabled = true;\n    return msg;\n}",
+        "func": "if(!msg.fromLive){\n    let type = flow.get(\"type_114\");\n    if(type == 110 || type == 114){\n        msg = {};\n        msg.ui_update = { \n            \"label\": \"\"\n        }\n        msg.enabled = false;\n        return msg;\n    } else if(type == 111){\n        // let probe = flow.get(\"probe\");\n        msg = {};\n        msg.ui_update = { \n            \"label\": \"probe 1\"\n        }\n        msg.enabled = true;\n        msg.payload = false;\n        return msg;\n    }\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1479,14 +1479,14 @@
         "width": 0,
         "height": 0,
         "head": "",
-        "format": ".v-main {\n    --v-layout-top: 0px !important;\n    --v-layout-left: 181px !important;\n    background-color: #2d2d2d !important;\n}\n.bg-group-background{\n    border-width: 0.5px !important;\n    border-radius:  15px !important;\n    background-color: #484848ae !important;\n    border-color: #fd8f00b1 !important;\n}\n.v-toolbar{\n    left: 12px !important;\n    top: 13px !important;\n    width: 50px !important;\n    height: 85px !important;\n    border-radius: 15px 0px 0px 15px;\n    background-color: #fd8f00b1 !important;\n    border-color: #fd8e00  !important;\n}\n.v-toolbar .v-btn{\n    top: 10px;\n}\n.v-navigation-drawer--left{\n    top: 115px !important;\n    height: 345px !important;\n    width: 180px !important;\n    background-color: #fd8f00b1 !important;\n    border-color: #fd8e00  !important;\n    border-radius: 0px 15px 15px 0px !important;\n}\n.gen4GroupSelectMac {\n    top: 740px !important;\n    width: 165px !important;\n    left: 13px !important;\n    position: absolute !important;\n}\n.gen4GroupSelectMac .v-card{\n    height:210px !important;\n}\n.gen4DatePicker{\n    color: white;\n    left: -11px;\n    width: 153px;\n    position: relative;\n}\n.gen4GrupoDownload{\n    height: 100px !important;\n    top: 475px;\n    position: absolute;\n    left: 13px;\n    width: 165px !important;\n}\n.gen4GrupoDownload .v-card{\n    height: 255px !important;\n}\n.vibrationPlusGroupTempBatt .v-card{\n    height: 246px !important;\n}\n.switch_114{\n    color: white;\n}\n.infoGroup {\n        width: 165px !important;\n}\n.infoGroup .v-card{\n    height: 256px !important;\n}\n.gen4gauge{\n    color: white;\n}\n.nrdb-ui-gauge-size-xs .nrdb-ui-gauge-value span {\n    font-size: 30px !important;\n}\n.gen4Dropdown{\n    color: white;\n}\n\ndiv.v-snackbar--variant-elevated {\n    width: 80vw;\n    max-width: 600px;\n    min-width: 400px;\n}\n.v-snackbar__content {\n    width: 100%;\n    color: white;\n}\n.v-snackbar--vertical .v-snackbar__wrapper {\n    background-color: #484848f7;\n    border-radius: 15px;\n    border: 10px;\n}\ndiv.v-snackbar--variant-elevated>.v-snackbar__actions button {\n    color: white;\n    background-color: #fd8f00b1 !important;\n    margin: 10px;\n}\ndiv.v-snackbar--variant-elevated table {\n    width: 100%;\n    border-collapse: collapse;\n}\ndiv.v-snackbar--variant-elevated th {\n    padding: 5px;\n    border-bottom: 4px solid var(--red-ui-form-input-border-color, #7b7b7b) !important;\n    text-align: left;\n}\ndiv.v-snackbar--variant-elevated td {\n    border-bottom: 1px solid var(--red-ui-form-input-border-color, #747474) !important;\n    padding: 4px;\n    text-align: left;\n}\n.diag_wrapper{\n    color: white;\n}\n.gen4DatePickerChart{\n    color: white;\n}\n.switch_live_114{\n    color: white;\n}",
+        "format": ".v-main {\n    --v-layout-top: 0px !important;\n    --v-layout-left: 181px !important;\n    background-color: #2d2d2d !important;\n}\n.bg-group-background{\n    border-width: 0.5px !important;\n    border-radius:  15px !important;\n    background-color: #484848ae !important;\n    border-color: #fd8f00b1 !important;\n}\n.v-toolbar{\n    left: 12px !important;\n    top: 13px !important;\n    width: 50px !important;\n    height: 85px !important;\n    border-radius: 15px 0px 0px 15px;\n    background-color: #fd8f00b1 !important;\n    border-color: #fd8e00  !important;\n}\n.v-toolbar .v-btn{\n    top: 10px;\n}\n.v-navigation-drawer--left{\n    top: 115px !important;\n    height: 345px !important;\n    width: 180px !important;\n    background-color: #fd8f00b1 !important;\n    border-color: #fd8e00  !important;\n    border-radius: 0px 15px 15px 0px !important;\n}\n.gen4GroupSelectMac {\n    top: 740px !important;\n    width: 165px !important;\n    left: 13px !important;\n    position: absolute !important;\n}\n.gen4GroupSelectMac .v-card{\n    height:210px !important;\n}\n.gen4DatePicker{\n    color: white;\n    left: -11px;\n    width: 153px;\n    position: relative;\n}\n.gen4GrupoDownload{\n    height: 100px !important;\n    top: 475px;\n    position: absolute;\n    left: 13px;\n    width: 165px !important;\n}\n.gen4GrupoDownload .v-card{\n    height: 255px !important;\n}\n.vibrationPlusGroupTempBatt .v-card{\n    height: 246px !important;\n}\n.switch_114{\n    color: white;\n}\n.infoGroup {\n        width: 165px !important;\n}\n.infoGroup .v-card{\n    height: 256px !important;\n}\n.gen4gauge{\n    color: white;\n}\n.nrdb-ui-gauge-size-xs .nrdb-ui-gauge-value span {\n    font-size: 30px !important;\n}\n.gen4Dropdown{\n    color: white;\n}\n\ndiv.v-snackbar--variant-elevated {\n    width: 80vw;\n    max-width: 600px;\n    min-width: 400px;\n}\n.v-snackbar__content {\n    width: 100%;\n    color: white;\n}\n.v-snackbar--vertical .v-snackbar__wrapper {\n    background-color: #484848f7;\n    border-radius: 15px;\n    border: 10px;\n}\ndiv.v-snackbar--variant-elevated>.v-snackbar__actions button {\n    color: white;\n    background-color: #fd8f00b1 !important;\n    margin: 10px;\n}\ndiv.v-snackbar--variant-elevated table {\n    width: 100%;\n    border-collapse: collapse;\n}\ndiv.v-snackbar--variant-elevated th {\n    padding: 5px;\n    border-bottom: 4px solid var(--red-ui-form-input-border-color, #7b7b7b) !important;\n    text-align: left;\n}\ndiv.v-snackbar--variant-elevated td {\n    border-bottom: 1px solid var(--red-ui-form-input-border-color, #747474) !important;\n    padding: 1px;\n    text-align: left;\n}\n.diag_wrapper{\n    color: white;\n}\n.gen4DatePickerChart{\n    color: white;\n}\n.switch_live_114{\n    color: white;\n}",
         "storeOutMessages": true,
         "passthru": false,
         "resendOnRefresh": true,
         "templateScope": "page:style",
         "className": "",
         "x": 4540,
-        "y": 100,
+        "y": 80,
         "wires": [
             []
         ]
@@ -1511,7 +1511,7 @@
         "templateScope": "widget:page",
         "className": "",
         "x": 3960,
-        "y": 100,
+        "y": 80,
         "wires": [
             []
         ]
@@ -1536,7 +1536,7 @@
         "templateScope": "widget:page",
         "className": "",
         "x": 3450,
-        "y": 100,
+        "y": 80,
         "wires": [
             []
         ]
@@ -1552,7 +1552,7 @@
             "bf4b9d24d246aee3"
         ],
         "x": 4055,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "1a7030fb1bfa64cf"
@@ -1569,7 +1569,7 @@
             "6debd157575965a5"
         ],
         "x": 4335,
-        "y": 860,
+        "y": 1040,
         "wires": [
             [
                 "1f26ae6dbb1cd08a"
@@ -1591,6 +1591,7 @@
         "gtype": "gauge-34",
         "gstyle": "needle",
         "title": "",
+        "alwaysShowTitle": false,
         "units": "",
         "icon": "",
         "prefix": "",
@@ -1598,15 +1599,21 @@
         "segments": [
             {
                 "from": "0",
-                "color": "#5cd65c"
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
             },
             {
                 "from": "40",
-                "color": "#ffc800"
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
             },
             {
                 "from": "70",
-                "color": "#ea5353"
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
             }
         ],
         "min": 0,
@@ -1618,7 +1625,7 @@
         "styleGlow": false,
         "className": "gen4gauge",
         "x": 4200,
-        "y": 740,
+        "y": 920,
         "wires": [
             []
         ]
@@ -1646,13 +1653,13 @@
         "yAxisLabel": "",
         "yAxisProperty": "battery_percent",
         "yAxisPropertyType": "property",
-        "ymin": "60",
+        "ymin": "70",
         "ymax": "",
         "bins": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -1679,9 +1686,9 @@
         "width": "2",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4540,
-        "y": 780,
+        "y": 960,
         "wires": [
             []
         ]
@@ -1698,7 +1705,7 @@
             "c76fe27ccb6fd037"
         ],
         "x": 3575,
-        "y": 820,
+        "y": 1000,
         "wires": [
             [
                 "154ecbdb23ddf01a"
@@ -1715,7 +1722,7 @@
             "24f40aac9b4f830e"
         ],
         "x": 4335,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "2a19adcc03faaefd"
@@ -1743,7 +1750,7 @@
         "to": "",
         "reg": false,
         "x": 4385,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "c76fe27ccb6fd037",
@@ -1759,10 +1766,11 @@
         "g": "33cfbcff7312a6e6",
         "name": "link in 94",
         "links": [
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 4335,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "7bf4dc27d4be6b51"
@@ -1779,7 +1787,7 @@
             "bf4b9d24d246aee3"
         ],
         "x": 4335,
-        "y": 820,
+        "y": 1000,
         "wires": [
             [
                 "7bf4dc27d4be6b51",
@@ -1816,7 +1824,7 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -1845,7 +1853,7 @@
         "className": "",
         "interpolation": "bezier",
         "x": 4190,
-        "y": 780,
+        "y": 960,
         "wires": [
             []
         ]
@@ -1860,17 +1868,17 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "ODR",
+        "label": "ODR:",
         "format": "{{msg.payload}}",
-        "layout": "col-center",
+        "layout": "row-spread",
         "style": true,
         "font": "",
-        "fontSize": "20",
+        "fontSize": "16",
         "color": "#ffffff",
         "wrapText": false,
         "className": "",
         "x": 3670,
-        "y": 820,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1902,7 +1910,7 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": true,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -1929,9 +1937,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 3500,
-        "y": 940,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -1946,8 +1954,8 @@
         "label": "X - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "x_velocity_mm_sec",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -1965,8 +1973,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -1992,9 +2000,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4020,
-        "y": 940,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -2009,8 +2017,8 @@
         "label": "X - Displacement [mm]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "x_displacement_mm",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -2028,8 +2036,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -2055,9 +2063,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4520,
-        "y": 940,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -2091,7 +2099,7 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": true,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -2120,7 +2128,7 @@
         "className": "",
         "interpolation": "bezier",
         "x": 3500,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -2135,8 +2143,8 @@
         "label": "Y - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "y_velocity_mm_sec",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -2154,8 +2162,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -2181,9 +2189,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4020,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -2198,8 +2206,8 @@
         "label": "Y - Displacement [mm]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "y_displacement_mm",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -2217,8 +2225,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -2244,9 +2252,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4520,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -2280,7 +2288,7 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": true,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -2307,9 +2315,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 3490,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -2324,8 +2332,8 @@
         "label": "Z - Velocity [mm/sec]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "z_velocity_mm_sec",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -2343,8 +2351,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -2370,9 +2378,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4020,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -2387,8 +2395,8 @@
         "label": "Z - Displacement [mm]",
         "order": 1,
         "chartType": "line",
-        "category": "",
-        "categoryType": "none",
+        "category": "z_displacement_mm",
+        "categoryType": "str",
         "xAxisLabel": "",
         "xAxisProperty": "received",
         "xAxisPropertyType": "property",
@@ -2406,8 +2414,8 @@
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
-        "showLegend": true,
+        "pointRadius": "3",
+        "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -2433,9 +2441,9 @@
         "width": "4",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 4520,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -2449,10 +2457,11 @@
         "links": [
             "c76fe27ccb6fd037",
             "bf4b9d24d246aee3",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 4055,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "27177f696970ba49"
@@ -2468,10 +2477,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3375,
-        "y": 940,
+        "y": 1120,
         "wires": [
             [
                 "7c0dea051c06e1fe"
@@ -2487,10 +2497,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3375,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             [
                 "9c775ed0af28f438"
@@ -2506,10 +2517,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3375,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             [
                 "d44b8133d0032393"
@@ -2525,10 +2537,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3885,
-        "y": 940,
+        "y": 1120,
         "wires": [
             [
                 "94b41b0dca8033f6"
@@ -2544,10 +2557,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3885,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             [
                 "44d86bcf31af0079"
@@ -2563,10 +2577,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3885,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             [
                 "5b34e3823452064a"
@@ -2582,10 +2597,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 4385,
-        "y": 940,
+        "y": 1120,
         "wires": [
             [
                 "d9e3767bd5e11937"
@@ -2601,10 +2617,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 4385,
-        "y": 1000,
+        "y": 1180,
         "wires": [
             [
                 "9d11ebbafbebf815"
@@ -2620,10 +2637,11 @@
         "links": [
             "bf4b9d24d246aee3",
             "c76fe27ccb6fd037",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 4385,
-        "y": 1060,
+        "y": 1240,
         "wires": [
             [
                 "96d321ba41dd19f3"
@@ -2656,10 +2674,23 @@
             "8a24745d274dca8b",
             "b54a9e20f8d9a5ae",
             "0118f7252fb24937",
-            "e9a6e04941f9686d"
+            "e9a6e04941f9686d",
+            "eeebbeb85197ecc8",
+            "cb20dd623969d883",
+            "6b99dd54170d69f3",
+            "24dee64eb560f0ae",
+            "081d75fa1257ebbd",
+            "f0fd5394412abb54",
+            "17ea968836d683fe",
+            "3982b468e4d0f98f",
+            "8d55b9846ba3b062",
+            "2b5829f954a1ee45",
+            "5d740b4a5ad85dc8",
+            "62fd3fc728da800a",
+            "9a29db5ac04a0b6a"
         ],
         "x": 4455,
-        "y": 740,
+        "y": 920,
         "wires": []
     },
     {
@@ -2700,7 +2731,7 @@
         "styleGlow": false,
         "className": "",
         "x": 4540,
-        "y": 820,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -2717,7 +2748,7 @@
             "c76fe27ccb6fd037"
         ],
         "x": 3795,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "85ce39db1d0d2ad8"
@@ -2744,7 +2775,7 @@
         "wrapText": false,
         "className": "",
         "x": 3890,
-        "y": 740,
+        "y": 920,
         "wires": []
     },
     {
@@ -2759,7 +2790,7 @@
             "c76fe27ccb6fd037"
         ],
         "x": 3575,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "c2a1fe17f87ea34f"
@@ -2776,17 +2807,17 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "Msg Type",
+        "label": "Msg Type: ",
         "format": "{{msg.payload}}",
-        "layout": "col-center",
+        "layout": "row-spread",
         "style": true,
         "font": "",
-        "fontSize": "20",
+        "fontSize": "15",
         "color": "#ffffff",
         "wrapText": false,
         "className": "",
-        "x": 3680,
-        "y": 780,
+        "x": 3690,
+        "y": 960,
         "wires": []
     },
     {
@@ -2801,7 +2832,7 @@
             "8320c380dd9804d0"
         ],
         "x": 3375,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "f4275b44c9050887"
@@ -2818,7 +2849,7 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "Firmware",
+        "label": "Firmware:",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "style": true,
@@ -2828,7 +2859,7 @@
         "wrapText": false,
         "className": "",
         "x": 3480,
-        "y": 740,
+        "y": 920,
         "wires": []
     },
     {
@@ -2843,7 +2874,7 @@
             "33431c4097ac272a"
         ],
         "x": 3375,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "9af1b0a546ae1ee5"
@@ -2860,7 +2891,7 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "RSSI",
+        "label": "RSSI:",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "style": true,
@@ -2870,7 +2901,7 @@
         "wrapText": false,
         "className": "",
         "x": 3470,
-        "y": 780,
+        "y": 960,
         "wires": []
     },
     {
@@ -2882,10 +2913,11 @@
         "links": [
             "c76fe27ccb6fd037",
             "bf4b9d24d246aee3",
-            "3633e7dbbd2ffc75"
+            "3633e7dbbd2ffc75",
+            "bad92bec208da393"
         ],
         "x": 3795,
-        "y": 780,
+        "y": 960,
         "wires": [
             [
                 "83ba578c0b46bca8"
@@ -2915,13 +2947,13 @@
         "yAxisLabel": "",
         "yAxisProperty": "rpm",
         "yAxisPropertyType": "property",
-        "ymin": "",
+        "ymin": "0",
         "ymax": "",
         "bins": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "circle",
-        "pointRadius": "2",
+        "pointRadius": "3",
         "showLegend": false,
         "removeOlder": "24",
         "removeOlderUnit": "3600",
@@ -2948,9 +2980,9 @@
         "width": "2",
         "height": "4",
         "className": "",
-        "interpolation": "bezier",
+        "interpolation": "smooth",
         "x": 3910,
-        "y": 780,
+        "y": 960,
         "wires": [
             []
         ]
@@ -2967,7 +2999,7 @@
             "3cf38206548a9938"
         ],
         "x": 3375,
-        "y": 820,
+        "y": 1000,
         "wires": [
             [
                 "98da5c62d58d9751"
@@ -2984,7 +3016,7 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "Mode  ",
+        "label": "Mode:",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "style": true,
@@ -2994,7 +3026,7 @@
         "wrapText": false,
         "className": "",
         "x": 3470,
-        "y": 820,
+        "y": 1000,
         "wires": []
     },
     {
@@ -3009,7 +3041,7 @@
             "1b46a0ab341a9aef"
         ],
         "x": 3375,
-        "y": 860,
+        "y": 1040,
         "wires": [
             [
                 "7b7fc642ea8c0de8"
@@ -3026,7 +3058,7 @@
         "width": "0",
         "height": "0",
         "name": "",
-        "label": "Counter",
+        "label": "Counter:",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "style": true,
@@ -3036,7 +3068,7 @@
         "wrapText": false,
         "className": "",
         "x": 3480,
-        "y": 860,
+        "y": 1040,
         "wires": []
     },
     {
@@ -3051,7 +3083,7 @@
             "97a68286ef75b23c"
         ],
         "x": 3575,
-        "y": 740,
+        "y": 920,
         "wires": [
             [
                 "a36220971adc5841"
@@ -3064,29 +3096,28 @@
         "z": "74f0f072aba2913a",
         "g": "33cfbcff7312a6e6",
         "group": "6b4cfee43f267b82",
-        "order": 3,
+        "order": 4,
         "width": "0",
         "height": "0",
         "name": "",
         "label": "Last Heard",
         "format": "{{msg.payload}}",
-        "layout": "row-center",
+        "layout": "row-spread",
         "style": true,
         "font": "",
-        "fontSize": "18",
+        "fontSize": "12",
         "color": "#ffffff",
         "wrapText": true,
         "className": "",
         "x": 3690,
-        "y": 740,
+        "y": 920,
         "wires": []
     },
     {
         "id": "ac19857639bd2943",
         "type": "ui-switch",
         "z": "74f0f072aba2913a",
-        "d": true,
-        "g": "33cfbcff7312a6e6",
+        "g": "e61f949b39718963",
         "name": "probe",
         "label": "P 1",
         "group": "4a3301f714eebc10",
@@ -3101,16 +3132,16 @@
         "className": "switch_114",
         "layout": "row-spread",
         "clickableArea": "label",
-        "onvalue": "P 2",
+        "onvalue": "Probe 2",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "P 1",
+        "offvalue": "Probe 1",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
-        "x": 3670,
-        "y": 860,
+        "x": 4210,
+        "y": 220,
         "wires": [
             [
                 "90bd54a3e02f434d"
@@ -3121,21 +3152,23 @@
         "id": "90bd54a3e02f434d",
         "type": "function",
         "z": "74f0f072aba2913a",
-        "d": true,
-        "g": "33cfbcff7312a6e6",
+        "g": "e61f949b39718963",
         "name": "function 1",
-        "func": "let label = msg.payload;\nflow.set('probe', label);\nmsg.ui_update = {\n    'label': label\n}\nreturn msg;",
-        "outputs": 1,
+        "func": "let msg1 = {};\nlet label = msg.payload;\n// flow.set('probe', label);\nmsg.ui_update = {\n    'label': label\n}\nif(label == \"Probe 1\"){\n    let unit = \n    {\n        groups: \n        { \n            show:\n            [\n                \"gen4Vibration:gen4Firmware\",\n                \"gen4Vibration:gen4MsgType\",\n                \"gen4Vibration:gen4Download\",\n                \"gen4Vibration:gen4Temperature\",\n                \"gen4Vibration:gen4RPM\",\n                \"gen4Vibration:gen4Battery\",\n                \"gen4Vibration:gen4ACCGroup_x\",\n                \"gen4Vibration:gen4VelDisplGroup_x\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x\",\n                \"gen4Vibration:gen4ACCGroup_y\",\n                \"gen4Vibration:gen4VelDisplGroup_y\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y\",\n                \"gen4Vibration:gen4ACCGroup_z\",\n                \"gen4Vibration:gen4VelDisplGroup_z\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z\"\n            ],\n            hide:\n            [\n                \"gen4Vibration:gen4Temperature2\",\n                \"gen4Vibration:gen4RPM2\",\n                \"gen4Vibration:gen4ACCGroup_x2\",\n                \"gen4Vibration:gen4ACCGroup_y2\",\n                \"gen4Vibration:gen4VelDisplGroup_x2\",\n                \"gen4Vibration:gen4ACCGroup_z2\",\n                \"gen4Vibration:gen4VelDisplGroup_y2\",\n                \"gen4Vibration:gen4VelDisplGroup_z2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z2\"\n            ],\n            enable:\n            [\n                \"gen4Vibration:gen4SelectMac\",\n                \"gen4Vibration:gen4Download\"\n            ]\n        }\n    }\n    msg1.payload = unit;\n    return [msg, msg1];\n} else if(label == \"Probe 2\"){\n        let unit = \n    {\n        groups: \n        { \n            show:\n            [\n                \"gen4Vibration:gen4Firmware\",\n                \"gen4Vibration:gen4MsgType\",\n                \"gen4Vibration:gen4Download\",\n                \"gen4Vibration:gen4Temperature2\",\n                \"gen4Vibration:gen4RPM2\",\n                \"gen4Vibration:gen4Battery\",\n                \"gen4Vibration:gen4ACCGroup_x2\",\n                \"gen4Vibration:gen4VelDisplGroup_x2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x2\",\n                \"gen4Vibration:gen4ACCGroup_y2\",\n                \"gen4Vibration:gen4VelDisplGroup_y2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y2\",\n                \"gen4Vibration:gen4ACCGroup_z2\",\n                \"gen4Vibration:gen4VelDisplGroup_z2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z2\"\n            ],\n            hide:\n            [\n                \"gen4Vibration:gen4Temperature\",\n                \"gen4Vibration:gen4RPM\",\n                \"gen4Vibration:gen4ACCGroup_x\",\n                \"gen4Vibration:gen4ACCGroup_y\",\n                \"gen4Vibration:gen4VelDisplGroup_x\",\n                \"gen4Vibration:gen4ACCGroup_z\",\n                \"gen4Vibration:gen4VelDisplGroup_y\",\n                \"gen4Vibration:gen4VelDisplGroup_z\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z\"\n            ],\n            enable:\n            [\n                \"gen4Vibration:gen4SelectMac\",\n                \"gen4Vibration:gen4Download\"\n            ]\n        }\n    }\n    msg1.payload = unit;\n    return [msg, msg1];\n}",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3820,
-        "y": 860,
+        "x": 4340,
+        "y": 220,
         "wires": [
             [
                 "ac19857639bd2943"
+            ],
+            [
+                "91131f71bf01b698"
             ]
         ]
     },
@@ -3143,13 +3176,14 @@
         "id": "9eb3395d3a8c2347",
         "type": "link in",
         "z": "74f0f072aba2913a",
-        "g": "33cfbcff7312a6e6",
+        "g": "e61f949b39718963",
         "name": "link in 11",
         "links": [
-            "3bb18c2073c5cf65"
+            "3bb18c2073c5cf65",
+            "a868714bee51b4aa"
         ],
-        "x": 3575,
-        "y": 860,
+        "x": 4105,
+        "y": 220,
         "wires": [
             [
                 "ac19857639bd2943"
@@ -3371,7 +3405,7 @@
         "templateScope": "widget:page",
         "className": "",
         "x": 3460,
-        "y": 1200,
+        "y": 740,
         "wires": [
             [
                 "6d701b75724b2c82"
@@ -3386,7 +3420,7 @@
         "name": "",
         "ui": "ec459411017ddf37",
         "events": "change",
-        "x": 3880,
+        "x": 4520,
         "y": 280,
         "wires": [
             []
@@ -3398,14 +3432,14 @@
         "z": "74f0f072aba2913a",
         "g": "e61f949b39718963",
         "name": "init_show_114",
-        "func": "let unit = {\n    groups: \n    { \n        show:\n        [\n            \"gen4Vibration:gen4RPM\",\n            \"gen4Vibration:gen4Firmware\",\n            \"gen4Vibration:gen4MsgType\",\n            \"gen4Vibration:gen4Download\",\n            \"gen4Vibration:gen4Temperature\",\n            \"gen4Vibration:gen4Battery\",\n            \"gen4Vibration:gen4ACCGroup_x\",\n            \"gen4Vibration:gen4VelDisplGroup_x\",\n            \"gen4Vibration:gen4OneTwoThreeGroup_x\",\n            \"gen4Vibration:gen4ACCGroup_y\",\n            \"gen4Vibration:gen4VelDisplGroup_y\",\n            \"gen4Vibration:gen4OneTwoThreeGroup_y\",\n            \"gen4Vibration:gen4ACCGroup_z\",\n            \"gen4Vibration:gen4VelDisplGroup_z\",\n            \"gen4Vibration:gen4OneTwoThreeGroup_z\"\n        ],\n        enable:\n        [\n            \"gen4Vibration:gen4SelectMac\",\n            \"gen4Vibration:gen4Download\"\n        ]\n    }\n}\nmsg.payload = unit;\nreturn msg;",
+        "func": "let unit = {\n    groups:\n    {\n        show:\n            [\n                \"gen4Vibration:gen4Firmware\",\n                \"gen4Vibration:gen4MsgType\",\n                \"gen4Vibration:gen4Download\",\n                \"gen4Vibration:gen4Temperature\",\n                \"gen4Vibration:gen4RPM\",\n                \"gen4Vibration:gen4Battery\",\n                \"gen4Vibration:gen4ACCGroup_x\",\n                \"gen4Vibration:gen4VelDisplGroup_x\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x\",\n                \"gen4Vibration:gen4ACCGroup_y\",\n                \"gen4Vibration:gen4VelDisplGroup_y\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y\",\n                \"gen4Vibration:gen4ACCGroup_z\",\n                \"gen4Vibration:gen4VelDisplGroup_z\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z\"\n            ],\n        hide:\n            [\n                \"gen4Vibration:gen4Temperature2\",\n                \"gen4Vibration:gen4RPM2\",\n                \"gen4Vibration:gen4ACCGroup_x2\",\n                \"gen4Vibration:gen4ACCGroup_y2\",\n                \"gen4Vibration:gen4VelDisplGroup_x2\",\n                \"gen4Vibration:gen4ACCGroup_z2\",\n                \"gen4Vibration:gen4VelDisplGroup_y2\",\n                \"gen4Vibration:gen4VelDisplGroup_z2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_x2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_y2\",\n                \"gen4Vibration:gen4OneTwoThreeGroup_z2\"\n            ],\n        enable:\n            [\n                \"gen4Vibration:gen4SelectMac\",\n                \"gen4Vibration:gen4Download\"\n            ]\n    }\n}\nmsg.payload = unit;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3620,
+        "x": 4320,
         "y": 280,
         "wires": [
             [
@@ -3485,8 +3519,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3930,
-        "y": 320,
+        "x": 3950,
+        "y": 280,
         "wires": [
             [
                 "f04c27227bd29867",
@@ -3526,10 +3560,24 @@
             "b54a9e20f8d9a5ae",
             "90e6192d9b4e41a2",
             "e9a6e04941f9686d",
-            "735d961aff7aae3d"
+            "735d961aff7aae3d",
+            "61399dcd2df1e6f6",
+            "eeebbeb85197ecc8",
+            "cb20dd623969d883",
+            "6b99dd54170d69f3",
+            "24dee64eb560f0ae",
+            "081d75fa1257ebbd",
+            "f0fd5394412abb54",
+            "17ea968836d683fe",
+            "3982b468e4d0f98f",
+            "8d55b9846ba3b062",
+            "2b5829f954a1ee45",
+            "5d740b4a5ad85dc8",
+            "62fd3fc728da800a",
+            "9a29db5ac04a0b6a"
         ],
-        "x": 4095,
-        "y": 320,
+        "x": 4055,
+        "y": 240,
         "wires": []
     },
     {
@@ -3558,7 +3606,7 @@
         "icon": "",
         "iconPosition": "right",
         "iconInnerPosition": "inside",
-        "x": 3800,
+        "x": 3760,
         "y": 420,
         "wires": [
             [
@@ -3611,7 +3659,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 4120,
+        "x": 4080,
         "y": 420,
         "wires": [
             [
@@ -3923,8 +3971,8 @@
         "enablePointerup": false,
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
-        "x": 3450,
-        "y": 320,
+        "x": 3470,
+        "y": 280,
         "wires": [
             [
                 "c8eec6ee3265ce34"
@@ -3950,8 +3998,8 @@
         "raw": false,
         "className": "",
         "name": "notif_114",
-        "x": 3620,
-        "y": 320,
+        "x": 3640,
+        "y": 280,
         "wires": [
             [
                 "395e74579496fe30"
@@ -3976,8 +4024,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 3770,
-        "y": 320,
+        "x": 3790,
+        "y": 280,
         "wires": [
             [
                 "a46498e6245cd887"
@@ -4000,7 +4048,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 3950,
+        "x": 3910,
         "y": 420,
         "wires": [
             [
@@ -4017,11 +4065,12 @@
         "links": [
             "c90a63c48f750238"
         ],
-        "x": 4185,
-        "y": 380,
+        "x": 4175,
+        "y": 360,
         "wires": [
             [
-                "3f206d83e47be21f"
+                "3f206d83e47be21f",
+                "f04c27227bd29867"
             ]
         ]
     },
@@ -4144,8 +4193,8 @@
         "syntax": "mustache",
         "template": "<div class=\"diag_wrapper\">\n    <h3>Address: {{payload.addr}} | Last Heard: {{payload.lastHeard}}</h3>\n    <table>\n        <thead>\n            <tr>\n                <th>CONFIGURATION</th>\n                <th>VALUE</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td>Firmware Version</td>\n                <td>{{payload.firmware}}</td>\n            </tr>\n            <tr>\n                <td>Destination Address</td>\n                <td>{{payload.destination_address}}</td>\n            </tr>\n            <tr>\n                <td>Operation Mode</td>\n                <td>{{payload.mode}}</td>\n            </tr>\n            <tr>\n                <td>Output Data Rate (ODR)</td>\n                <td>{{payload.odr}}</td>\n            </tr>\n            <tr>\n                <td>Sampling Duration</td>\n                <td>{{payload.sampling_duration}}</td>\n            </tr>\n            <tr>\n                <td>Filter Status</td>\n                <td>{{payload.filter_status}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Coefficient</td>\n                <td>{{payload.lpf_coeff}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Frequency</td>\n                <td>{{payload.lpf_freq}}</td>\n            </tr>\n              <tr>\n                <td>High Pass Filter Coefficient</td>\n                <td>{{payload.hpf_coeff}}</td>\n            </tr>\n            <tr>\n                <td>High Pass Filter Frequency</td>\n                <td>{{payload.hpf_freq}}</td>\n            </tr>\n            <tr>\n                <td>Sampling Interval</td>\n                <td>{{payload.sampling_interval}}</td>\n            </tr>\n             <tr>\n                <td>On Request Timeout</td>\n                <td>{{payload.on_request_timeout}}</td>\n            </tr>\n            <tr>\n                <td>DeadBand</td>\n                <td>{{payload.deadband}}</td>\n            </tr>\n              <tr>\n                <td>Payload Length</td>\n                <td>{{payload.payload_length}}</td>\n            </tr>\n            <tr>\n                <td>Full Scale Range (FSR)</td>\n                <td>{{payload.fsr}}</td>\n            </tr>\n            <tr>\n                <td>RPM Compute Status</td>\n                <td>{{payload.rpm_compute_status}}</td>\n            </tr>\n            <tr>\n                <td>Auto Raw Destination Address</td>\n                <td>{{payload.auto_raw_destination_address}}</td>\n            </tr>\n            <tr>\n                <td>Auto Raw Interval</td>\n                <td>{{payload.auto_raw_interval}}</td>\n            </tr>\n            <tr>\n                <td>Smart Mode - Skip Count</td>\n                <td>{{payload.smart_mode_skip_count}}</td>\n            </tr>\n            <tr>\n                <td>Smart Mode - Acceleration Threshold</td>\n                <td>{{payload.smart_mode_acc_threshold}}</td>\n            </tr>\n            <tr>\n                <td>Uptime Counter</td>\n                <td>{{payload.uptime_counter}}</td>\n            </tr>\n            <tr>\n                <td>Max Transmission Raw Samples</td>\n                <td>{{payload.max_tx_raw_samples}}</td>\n            </tr>\n            <tr>\n                <td>Motion to Sampling Delay</td>\n                <td>{{payload.motion_to_sampling_delay}}</td>\n            </tr>\n            <tr>\n                <td>Max Number of Motion Transmission Per Interval</td>\n                <td>{{payload.max_num_of_motion_tx_per_interval}}</td>\n            </tr>\n            <tr>\n                <td>Hardware ID</td>\n                <td>{{payload.hardware_id}}</td>\n            </tr>\n            <tr>\n                <td>Reserved</td>\n                <td>{{payload.reserved}}</td>\n            </tr>\n            <tr>\n                <td>Transmission Lifetime Counter</td>\n                <td>{{payload.tx_lifetime_counter}}</td>\n            </tr>\n            <tr>\n                <td>RSSI</td>\n                <td>{{payload.rssi}}</td>\n            </tr>\n        </tbody>\n    </table>\n</div>",
         "output": "str",
-        "x": 4330,
-        "y": 1200,
+        "x": 4370,
+        "y": 720,
         "wires": [
             [
                 "94ebd5ae11609e4f"
@@ -4211,7 +4260,7 @@
             "da4ab9390b172b35"
         ],
         "x": 4605,
-        "y": 1200,
+        "y": 760,
         "wires": []
     },
     {
@@ -4219,18 +4268,21 @@
         "type": "function",
         "z": "74f0f072aba2913a",
         "name": "build-structure-to-get-data",
-        "func": "let msg1 = {};\nmsg1.payload = [];\nnode.send(msg1);\n\nlet keyMapping = {\n    col1: \"time\",\n    col2: \"counter\",\n    col3: \"battery_percent\",\n    col4: \"rssi\",\n    col5: \"sensor_type\",\n    col6: \"mode\",\n    col7: \"msg_type\",\n    col8: \"odr\",\n    col9: \"temperature\",\n    col10: \"x_rms_ACC_G\",\n    col11: \"x_max_ACC_G\",\n    col12: \"x_velocity_mm_sec\",\n    col13: \"x_displacement_mm\",\n    col14: \"x_peak_one_Hz\",\n    col15: \"x_peak_two_Hz\",\n    col16: \"x_peak_three_Hz\",\n    col17: \"y_rms_ACC_G\",\n    col18: \"y_max_ACC_G\",\n    col19: \"y_velocity_mm_sec\",\n    col20: \"y_displacement_mm\",\n    col21: \"y_peak_one_Hz\",\n    col22: \"y_peak_two_Hz\",\n    col23: \"y_peak_three_Hz\",\n    col24: \"z_rms_ACC_G\",\n    col25: \"z_max_ACC_G\",\n    col26: \"z_velocity_mm_sec\",\n    col27: \"z_displacement_mm\",\n    col28: \"z_peak_one_Hz\",\n    col29: \"z_peak_two_Hz\",\n    col30: \"z_peak_three_Hz\",\n    col31: \"rpm\",\n    col32: \"firmware\",\n    col33: \"received\",\n    col34: \"addr\"\n};\n\nmsg.payload = msg.payload.map(originalObject => {\n    const newObject = {}; // Initialize an empty object for the transformed data.\n\n    // Iterate over the keys *present in the original input object*.\n    // This is more robust as it only processes keys that actually exist in the data.\n    for (const originalKey in originalObject) {\n        // Ensure the key is a direct property of the object (not from prototype chain)\n        // and that it exists in our defined keyMapping.\n        if (originalObject.hasOwnProperty(originalKey) && keyMapping.hasOwnProperty(originalKey)) {\n            const newKey = keyMapping[originalKey];\n            newObject[newKey] = originalObject[originalKey];\n        } else {\n            // Log a warning if a key from the input object is not found in the keyMapping.\n            // This is crucial for debugging why objects might be empty.\n            node.warn(`Key '${originalKey}' from input object not found in keyMapping. Skipping this property.`);\n        }\n    }\n    return newObject; // Return the newly transformed object.\n});\nreturn msg;\n",
-        "outputs": 1,
+        "func": "let msg1 = {};\nmsg1.payload = [];\nnode.send([msg1, msg1]);\n// Check if the payload is valid and has data. If not, stop the flow.\n// This prevents errors if an empty message is received.\nif (!msg.payload || !Array.isArray(msg.payload) || msg.payload.length === 0) {\n    node.warn(\"Payload is empty or not an array.\");\n    return null; // Stop the message from continuing.\n}\n\nconst sensor_type = msg.payload[0].col5;\n\n// Use const for variables that do not get reassigned.\nconst keyMapping = {};\n\n// Select the correct mapping based on the sensor type.\nif (sensor_type == 110 || sensor_type == 114) {\n    Object.assign(keyMapping, {\n        col1: \"time\",\n        col2: \"counter\",\n        col3: \"battery_percent\",\n        col4: \"rssi\",\n        col5: \"sensor_type\",\n        col6: \"firmware\",\n        col7: \"mode\",\n        col8: \"msg_type\",\n        col9: \"odr\",\n        col10: \"temperature\",\n        col11: \"x_rms_ACC_G\",\n        col12: \"x_max_ACC_G\",\n        col13: \"x_velocity_mm_sec\",\n        col14: \"x_displacement_mm\",\n        col15: \"x_peak_one_Hz\",\n        col16: \"x_peak_two_Hz\",\n        col17: \"x_peak_three_Hz\",\n        col18: \"y_rms_ACC_G\",\n        col19: \"y_max_ACC_G\",\n        col20: \"y_velocity_mm_sec\",\n        col21: \"y_displacement_mm\",\n        col22: \"y_peak_one_Hz\",\n        col23: \"y_peak_two_Hz\",\n        col24: \"y_peak_three_Hz\",\n        col25: \"z_rms_ACC_G\",\n        col26: \"z_max_ACC_G\",\n        col27: \"z_velocity_mm_sec\",\n        col28: \"z_displacement_mm\",\n        col29: \"z_peak_one_Hz\",\n        col30: \"z_peak_two_Hz\",\n        col31: \"z_peak_three_Hz\",\n        col32: \"rpm\",\n        col33: \"received\",\n        col34: \"addr\"\n    });\n} else if (sensor_type == 111) {\n    Object.assign(keyMapping, {\n        col1: \"time\",\n        col2: \"counter\",\n        col3: \"battery_percent\",\n        col4: \"rssi\",\n        col5: \"sensor_type\",\n        col6: \"firmware\",\n        col7: \"mode\",\n        col8: \"msg_type\",\n        col9: \"odr\",\n        col10: \"temperature\",\n        col11: \"x_rms_ACC_G\",\n        col12: \"x_max_ACC_G\",\n        col13: \"x_velocity_mm_sec\",\n        col14: \"x_displacement_mm\",\n        col15: \"x_peak_one_Hz\",\n        col16: \"x_peak_two_Hz\",\n        col17: \"x_peak_three_Hz\",\n        col18: \"y_rms_ACC_G\",\n        col19: \"y_max_ACC_G\",\n        col20: \"y_velocity_mm_sec\",\n        col21: \"y_displacement_mm\",\n        col22: \"y_peak_one_Hz\",\n        col23: \"y_peak_two_Hz\",\n        col24: \"y_peak_three_Hz\",\n        col25: \"z_rms_ACC_G\",\n        col26: \"z_max_ACC_G\",\n        col27: \"z_velocity_mm_sec\",\n        col28: \"z_displacement_mm\",\n        col29: \"z_peak_one_Hz\",\n        col30: \"z_peak_two_Hz\",\n        col31: \"z_peak_three_Hz\",\n        col32: \"rpm\",\n        col33: \"s2_odr\",\n        col34: \"s2_temperature\",\n        col35: \"x2_rms_ACC_G\",\n        col36: \"x2_max_ACC_G\",\n        col37: \"x2_velocity_mm_sec\",\n        col38: \"x2_displacement_mm\",\n        col39: \"x2_peak_one_Hz\",\n        col40: \"x2_peak_two_Hz\",\n        col41: \"x2_peak_three_Hz\",\n        col42: \"y2_rms_ACC_G\",\n        col43: \"y2_max_ACC_G\",\n        col44: \"y2_velocity_mm_sec\",\n        col45: \"y2_displacement_mm\",\n        col46: \"y2_peak_one_Hz\",\n        col47: \"y2_peak_two_Hz\",\n        col48: \"y2_peak_three_Hz\",\n        col49: \"z2_rms_ACC_G\",\n        col50: \"z2_max_ACC_G\",\n        col51: \"z2_velocity_mm_sec\",\n        col52: \"z2_displacement_mm\",\n        col53: \"z2_peak_one_Hz\",\n        col54: \"z2_peak_two_Hz\",\n        col55: \"z2_peak_three_Hz\",\n        col56: \"rpm_2\",\n        col57: \"received\",\n        col58: \"addr\"\n    });\n} else {\n    // If the sensor type is unknown, warn the user and stop the flow.\n    node.warn(`Unknown sensor_type: '${sensor_type}'. No key mapping available.`);\n    return null;\n}\n\n// Transform the payload using the selected mapping.\n// This logic is robust and was already well-written.\nmsg.payload = msg.payload.map(originalObject => {\n    const newObject = {};\n    for (const originalKey in originalObject) {\n        if (originalObject.hasOwnProperty(originalKey) && keyMapping.hasOwnProperty(originalKey)) {\n            const newKey = keyMapping[originalKey];\n            newObject[newKey] = originalObject[originalKey];\n        }\n    }\n    return newObject;\n});\n\n// Route the transformed message to the correct output.\nif (sensor_type == 110 || sensor_type == 114) {\n    // Output 1 for sensor types 110 & 114.\n    return [msg, null];\n} else {\n    // Output 2 for all other types (e.g., 111).\n    return [null, msg];\n}",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2870,
-        "y": 820,
+        "x": 2890,
+        "y": 1040,
         "wires": [
             [
                 "3633e7dbbd2ffc75"
+            ],
+            [
+                "bad92bec208da393"
             ]
         ]
     },
@@ -4254,8 +4306,8 @@
             "672d1596b929fe61",
             "30bcc6f673b5632f"
         ],
-        "x": 3015,
-        "y": 820,
+        "x": 3035,
+        "y": 1020,
         "wires": []
     },
     {
@@ -4453,6 +4505,13 @@
                 "pt": "msg",
                 "to": "mac_selection_114",
                 "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "fromLive",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -4595,18 +4654,21 @@
         "z": "74f0f072aba2913a",
         "g": "1c1487df525464e4",
         "name": "build-FLY-path-to-load",
-        "func": "let base_path = flow.get(\"base_path_114\") || null;\nlet count = flow.get(\"mac_count_114\") || null;\nlet addresses = flow.get(\"mac_addresses_114\") || null;\n\nlet type = {};\nlet addr = flow.get('mac_selection_114') || null;\n\nif (base_path != null && count != null && addresses != null && addr != null){\n    for (let index = 0; index < count; index++) {\n        if (addresses[index].mac == addr){\n            type = addresses[index].type;\n            flow.set(\"type_114\", type);\n        }\n    }\n    msg.filename = base_path + type + \"/\" + addr + \"/FLY/\" + \"fly.log\";\n    return msg;\n}",
-        "outputs": 1,
+        "func": "let base_path = flow.get(\"base_path_114\") || null;\nlet count = flow.get(\"mac_count_114\") || null;\nlet addresses = flow.get(\"mac_addresses_114\") || null;\n\nlet type = {};\nlet addr = flow.get('mac_selection_114') || null;\n\nif (base_path != null && count != null && addresses != null && addr != null){\n    for (let index = 0; index < count; index++) {\n        if (addresses[index].mac == addr){\n            type = addresses[index].type;\n            flow.set(\"type_114\", type);\n        }\n    }\n    msg.filename = base_path + type + \"/\" + addr + \"/FLY/\" + \"fly.log\";\n    if(type == 110 || type == 114) return [msg, null];\n    else if(type == 111) return [null, msg];\n}",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3700,
-        "y": 1200,
+        "x": 3720,
+        "y": 740,
         "wires": [
             [
                 "4a07a32a3ab1b433"
+            ],
+            [
+                "dd57661c5c7e8538"
             ]
         ]
     },
@@ -4623,8 +4685,8 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 3910,
-        "y": 1200,
+        "x": 3930,
+        "y": 720,
         "wires": [
             [
                 "04949fc80df81808"
@@ -4640,8 +4702,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 4090,
-        "y": 1200,
+        "x": 4070,
+        "y": 720,
         "wires": [
             [
                 "d48e3df243069a66"
@@ -4743,8 +4805,8 @@
             "4a07a32a3ab1b433"
         ],
         "uncaught": false,
-        "x": 4210,
-        "y": 1260,
+        "x": 4270,
+        "y": 800,
         "wires": [
             [
                 "67b55719c81956dd"
@@ -4771,8 +4833,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 4380,
-        "y": 1260,
+        "x": 4420,
+        "y": 800,
         "wires": [
             [
                 "94ebd5ae11609e4f"
@@ -4784,8 +4846,8 @@
         "type": "function",
         "z": "74f0f072aba2913a",
         "name": "enable-address-group",
-        "func": "let addresses = flow.get('mac_selection_114') || null;\nif(addresses){\n    let live = msg.live;\n    let config = msg.config;\n    let lastLive = flow.get('lastlive');\n    let unit = {};\n    if(live || config){\n        if(config){\n            unit = {\n                groups:\n                {\n                    disable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\",\n                            \"gen4Vibration:gen4ConfigCharts\"\n                        ]\n                }\n            }\n        } else {\n            unit = {\n                groups:\n                {\n                    disable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\"\n                        ]\n                }\n            }\n            flow.set('lastlive', live);\n        }\n    }else if((live == false) || (config == false)){\n        if(config == false){\n            if(lastLive){\n                unit = {\n                    groups:\n                    {\n                        enable:\n                            [\n                                \"gen4Vibration:gen4ConfigCharts\"\n                            ]\n                    }\n                }\n            }\n            else {\n                unit = {\n                    groups:\n                    {\n                        enable:\n                            [\n                                \"gen4Vibration:gen4SelectMac\",\n                                \"gen4Vibration:gen4Download\",\n                                \"gen4Vibration:gen4ConfigCharts\"\n                            ]\n                    }\n                }\n            }\n        }else if (live == false){ \n            unit = {\n                groups:\n                {\n                    enable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\"\n                        ]\n                }\n            }\n            flow.set('lastlive', live);\n        }\n    }\n    msg.payload = unit;\n    return msg;\n}\n",
-        "outputs": 1,
+        "func": "let msg1 = {};\nlet addresses = flow.get('mac_selection_114') || null;\nif(addresses){\n    let live = msg.live;\n    let config = msg.config;\n    let lastLive = flow.get('lastlive');\n    let unit = {};\n    if(live || config){\n        if(config){\n            unit = {\n                groups:\n                {\n                    disable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\",\n                            \"gen4Vibration:gen4ConfigCharts\"\n                        ]\n                }\n            }\n        } else {\n            unit = {\n                groups:\n                {\n                    disable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\"\n                        ]\n                }\n            }\n            msg1.enabled = false;\n            flow.set('lastlive', live);\n        }\n    }else if((live == false) || (config == false)){\n        if(config == false){\n            if(lastLive){\n                unit = {\n                    groups:\n                    {\n                        enable:\n                            [\n                                \"gen4Vibration:gen4ConfigCharts\"\n                            ]\n                    }\n                }\n            }\n            else {\n                unit = {\n                    groups:\n                    {\n                        enable:\n                            [\n                                \"gen4Vibration:gen4SelectMac\",\n                                \"gen4Vibration:gen4Download\",\n                                \"gen4Vibration:gen4ConfigCharts\"\n                            ]\n                    }\n                }\n            }\n        }else if (live == false){ \n            unit = {\n                groups:\n                {\n                    enable:\n                        [\n                            \"gen4Vibration:gen4SelectMac\",\n                            \"gen4Vibration:gen4Download\"\n                        ]\n                }\n            }\n            msg1.enabled = true;\n            flow.set('lastlive', live);\n        }\n    }\n    msg.payload = unit;\n    return [msg, msg1];\n}",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -4796,6 +4858,9 @@
         "wires": [
             [
                 "113fd8f10744898f"
+            ],
+            [
+                "a868714bee51b4aa"
             ]
         ]
     },
@@ -4806,28 +4871,11 @@
         "name": "link out 1",
         "mode": "link",
         "links": [
-            "e9e9fd86e2f4566c"
+            "ae6382c2c39d1710"
         ],
         "x": 1065,
-        "y": 860,
+        "y": 840,
         "wires": []
-    },
-    {
-        "id": "e9e9fd86e2f4566c",
-        "type": "link in",
-        "z": "74f0f072aba2913a",
-        "g": "e61f949b39718963",
-        "name": "link in 13",
-        "links": [
-            "113fd8f10744898f"
-        ],
-        "x": 3765,
-        "y": 260,
-        "wires": [
-            [
-                "91131f71bf01b698"
-            ]
-        ]
     },
     {
         "id": "fce5ab988eb080c3",
@@ -4874,7 +4922,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
+        "x": 710,
         "y": 860,
         "wires": [
             [
@@ -4911,7 +4959,7 @@
         "links": [
             "2d789d2f8720ba36"
         ],
-        "x": 2955,
+        "x": 3035,
         "y": 280,
         "wires": []
     },
@@ -4959,7 +5007,7 @@
         "type": "function",
         "z": "74f0f072aba2913a",
         "name": "build-sensor-structure-and-headers",
-        "func": "// Check if msg.payload and sensor_data exist\nif (msg.payload) {\n    // Normalize MAC address (e.g., lowercase for consistent comparison)\n    const newMAC = msg.payload.addr;\n    // Initialize flow storage for MAC addresses and counter\n    let macAddresses = flow.get('mac_addresses_114') || [];\n\n\n    // Get the sensor_data object\n    const sensorData = msg.payload;\n    const type = msg.payload.sensor_type;\n    let columnOrder = [];\n    if (type == 110 || type == 114) {\n        // Define the desired order of columns (optional, to ensure specific order)\n        columnOrder = [\n            \"time\",\n            \"counter\",\n            \"battery_percent\",\n            \"rssi\",\n            \"sensor_type\",\n            \"mode\",\n            \"msg_type\",\n            \"odr\",\n            \"temperature\",\n            \"x_rms_ACC_G\",\n            \"x_max_ACC_G\",\n            \"x_velocity_mm_sec\",\n            \"x_displacement_mm\",\n            \"x_peak_one_Hz\",\n            \"x_peak_two_Hz\",\n            \"x_peak_three_Hz\",\n            \"y_rms_ACC_G\",\n            \"y_max_ACC_G\",\n            \"y_velocity_mm_sec\",\n            \"y_displacement_mm\",\n            \"y_peak_one_Hz\",\n            \"y_peak_two_Hz\",\n            \"y_peak_three_Hz\",\n            \"z_rms_ACC_G\",\n            \"z_max_ACC_G\",\n            \"z_velocity_mm_sec\",\n            \"z_displacement_mm\",\n            \"z_peak_one_Hz\",\n            \"z_peak_two_Hz\",\n            \"z_peak_three_Hz\",\n            \"rpm\",\n            \"firmware\",\n            \"received\",\n            \"addr\"\n        ];\n    } else if (type == 111) {\n        // Define the desired order of columns (optional, to ensure specific order)\n        columnOrder = [\n            \"time\",\n            \"counter\",\n            \"battery_percent\",\n            \"rssi\",\n            \"sensor_type\",\n            \"mode\",\n            \"msg_type\",\n            \"s1_odr\",\n            \"s1_temperature\",\n            \"x1_rms_ACC_G\",\n            \"x1_max_ACC_G\",\n            \"x1_velocity_mm_sec\",\n            \"x1_displacement_mm\",\n            \"x1_peak_one_Hz\",\n            \"x1_peak_two_Hz\",\n            \"x1_peak_three_Hz\",\n            \"y1_rms_ACC_G\",\n            \"y1_max_ACC_G\",\n            \"y1_velocity_mm_sec\",\n            \"y1_displacement_mm\",\n            \"y1_peak_one_Hz\",\n            \"y1_peak_two_Hz\",\n            \"y1_peak_three_Hz\",\n            \"z1_rms_ACC_G\",\n            \"z1_max_ACC_G\",\n            \"z1_velocity_mm_sec\",\n            \"z1_displacement_mm\",\n            \"z1_peak_one_Hz\",\n            \"z1_peak_two_Hz\",\n            \"z1_peak_three_Hz\",\n            \"rpm_1\",\n            \"s2_odr\",\n            \"s2_temperature\",\n            \"x2_rms_ACC_G\",\n            \"x2_max_ACC_G\",\n            \"x2_velocity_mm_sec\",\n            \"x2_displacement_mm\",\n            \"x2_peak_one_Hz\",\n            \"x2_peak_two_Hz\",\n            \"x2_peak_three_Hz\",\n            \"y2_rms_ACC_G\",\n            \"y2_max_ACC_G\",\n            \"y2_velocity_mm_sec\",\n            \"y2_displacement_mm\",\n            \"y2_peak_one_Hz\",\n            \"y2_peak_two_Hz\",\n            \"y2_peak_three_Hz\",\n            \"z2_rms_ACC_G\",\n            \"z2_max_ACC_G\",\n            \"z2_velocity_mm_sec\",\n            \"z2_displacement_mm\",\n            \"z2_peak_one_Hz\",\n            \"z2_peak_two_Hz\",\n            \"z2_peak_three_Hz\",\n            \"rpm_2\",\n            \"firmware\",\n            \"received\",\n            \"addr\"\n        ];\n    }\n    // Filter out any columns that don't exist in sensorData\n    const availableColumns = columnOrder.filter(key => key in sensorData);\n\n    // Check if MAC address already exists\n    const existingEntry = macAddresses.find(entry => entry.mac === newMAC);\n\n    // Join the columns into a comma-separated string without a trailing space\n    msg.columns = availableColumns.join(\",\");\n    // Check if the file exists using context flow\n    let today = new Date().toDateString();\n    let lastHeaderDate = flow.get('lastHeaderDate') || '';\n    \n    // If the file does not exist, or a new day has started, add headers\n    if (!existingEntry || (lastHeaderDate !== today)) {\n        msg.payload = msg.columns + \"\\n\" + availableColumns.map(key => sensorData[key]).join(\",\");\n        flow.set('lastHeaderDate', today);\n    }else {\n        msg.payload = availableColumns.map(key => sensorData[key]).join(\",\");\n    }\n    return msg;\n}",
+        "func": "// Check if msg.payload and sensor_data exist\nif (msg.payload) {\n    // Normalize MAC address (e.g., lowercase for consistent comparison)\n    const newMAC = msg.payload.addr;\n    // Initialize flow storage for MAC addresses and counter\n    let macAddresses = flow.get('mac_addresses_114') || [];\n\n\n    // Get the sensor_data object\n    const sensorData = msg.payload;\n    const type = msg.payload.sensor_type;\n    let columnOrder = [];\n    if (type == 110 || type == 114) {\n        // Define the desired order of columns (optional, to ensure specific order)\n        columnOrder = [\n            \"time\",\n            \"counter\",\n            \"battery_percent\",\n            \"rssi\",\n            \"sensor_type\",\n            \"firmware\",\n            \"mode\",\n            \"msg_type\",\n            \"odr\",\n            \"temperature\",\n            \"x_rms_ACC_G\",\n            \"x_max_ACC_G\",\n            \"x_velocity_mm_sec\",\n            \"x_displacement_mm\",\n            \"x_peak_one_Hz\",\n            \"x_peak_two_Hz\",\n            \"x_peak_three_Hz\",\n            \"y_rms_ACC_G\",\n            \"y_max_ACC_G\",\n            \"y_velocity_mm_sec\",\n            \"y_displacement_mm\",\n            \"y_peak_one_Hz\",\n            \"y_peak_two_Hz\",\n            \"y_peak_three_Hz\",\n            \"z_rms_ACC_G\",\n            \"z_max_ACC_G\",\n            \"z_velocity_mm_sec\",\n            \"z_displacement_mm\",\n            \"z_peak_one_Hz\",\n            \"z_peak_two_Hz\",\n            \"z_peak_three_Hz\",\n            \"rpm\",\n            \"received\",\n            \"addr\"\n        ];\n    } else if (type == 111) {\n        // Define the desired order of columns (optional, to ensure specific order)\n        columnOrder = [\n            \"time\",\n            \"counter\",\n            \"battery_percent\",\n            \"rssi\",\n            \"sensor_type\",\n            \"firmware\",\n            \"mode\",\n            \"msg_type\",\n            \"s1_odr\",\n            \"s1_temperature\",\n            \"x1_rms_ACC_G\",\n            \"x1_max_ACC_G\",\n            \"x1_velocity_mm_sec\",\n            \"x1_displacement_mm\",\n            \"x1_peak_one_Hz\",\n            \"x1_peak_two_Hz\",\n            \"x1_peak_three_Hz\",\n            \"y1_rms_ACC_G\",\n            \"y1_max_ACC_G\",\n            \"y1_velocity_mm_sec\",\n            \"y1_displacement_mm\",\n            \"y1_peak_one_Hz\",\n            \"y1_peak_two_Hz\",\n            \"y1_peak_three_Hz\",\n            \"z1_rms_ACC_G\",\n            \"z1_max_ACC_G\",\n            \"z1_velocity_mm_sec\",\n            \"z1_displacement_mm\",\n            \"z1_peak_one_Hz\",\n            \"z1_peak_two_Hz\",\n            \"z1_peak_three_Hz\",\n            \"rpm_1\",\n            \"s2_odr\",\n            \"s2_temperature\",\n            \"x2_rms_ACC_G\",\n            \"x2_max_ACC_G\",\n            \"x2_velocity_mm_sec\",\n            \"x2_displacement_mm\",\n            \"x2_peak_one_Hz\",\n            \"x2_peak_two_Hz\",\n            \"x2_peak_three_Hz\",\n            \"y2_rms_ACC_G\",\n            \"y2_max_ACC_G\",\n            \"y2_velocity_mm_sec\",\n            \"y2_displacement_mm\",\n            \"y2_peak_one_Hz\",\n            \"y2_peak_two_Hz\",\n            \"y2_peak_three_Hz\",\n            \"z2_rms_ACC_G\",\n            \"z2_max_ACC_G\",\n            \"z2_velocity_mm_sec\",\n            \"z2_displacement_mm\",\n            \"z2_peak_one_Hz\",\n            \"z2_peak_two_Hz\",\n            \"z2_peak_three_Hz\",\n            \"rpm_2\",\n            \"received\",\n            \"addr\"\n        ];\n    }\n    // Filter out any columns that don't exist in sensorData\n    const availableColumns = columnOrder.filter(key => key in sensorData);\n\n    // Check if MAC address already exists\n    const existingEntry = macAddresses.find(entry => entry.mac === newMAC);\n\n    // Join the columns into a comma-separated string without a trailing space\n    msg.columns = availableColumns.join(\",\");\n    // Check if the file exists using context flow\n    let today = new Date().toDateString();\n    let lastHeaderDate = flow.get('lastHeaderDate') || '';\n    \n    // If the file does not exist, or a new day has started, add headers\n    if (!existingEntry || (lastHeaderDate !== today)) {\n        msg.payload = msg.columns + \"\\n\" + availableColumns.map(key => sensorData[key]).join(\",\");\n        flow.set('lastHeaderDate', today);\n    }else {\n        msg.payload = availableColumns.map(key => sensorData[key]).join(\",\");\n    }\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4993,7 +5041,7 @@
         "links": [
             "b5276dd0ff2c7158"
         ],
-        "x": 3015,
+        "x": 3035,
         "y": 340,
         "wires": []
     },
@@ -5006,10 +5054,1428 @@
             "69694938601f0b58"
         ],
         "x": 1305,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "cdd173c09b746d57"
+            ]
+        ]
+    },
+    {
+        "id": "bad92bec208da393",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "21ab969fdb30288f",
+            "6c72da5b2f90c170",
+            "71fe5998a0986d47",
+            "999d7d7460edd890",
+            "ba5f531a90b5c137",
+            "3b39bce2d676b838",
+            "29db896bdbe704e9",
+            "f08296d37c8f3aba",
+            "f8b55adc9cd5d2b6",
+            "c50c02e0cb9fc2a9",
+            "672d1596b929fe61",
+            "30bcc6f673b5632f",
+            "eeebbeb85197ecc8",
+            "6b99dd54170d69f3",
+            "24dee64eb560f0ae",
+            "081d75fa1257ebbd",
+            "f0fd5394412abb54",
+            "17ea968836d683fe",
+            "3982b468e4d0f98f",
+            "8d55b9846ba3b062",
+            "2b5829f954a1ee45",
+            "5d740b4a5ad85dc8",
+            "62fd3fc728da800a"
+        ],
+        "x": 3035,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "cae9d8dbfd2a7aa8",
+        "type": "change",
+        "z": "74f0f072aba2913a",
+        "name": "getLastHeard",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$moment(payload.col33).format(\"yyyy-MM-dd HH:mm:ss\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2920,
+        "y": 420,
+        "wires": [
+            [
+                "97a68286ef75b23c"
+            ]
+        ]
+    },
+    {
+        "id": "61399dcd2df1e6f6",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 16",
+        "links": [
+            "bf4b9d24d246aee3",
+            "525d1c944c4b007b"
+        ],
+        "x": 4055,
+        "y": 1000,
+        "wires": [
+            [
+                "7601be67da67205e"
+            ]
+        ]
+    },
+    {
+        "id": "7601be67da67205e",
+        "type": "ui-gauge",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "vpTempGauge",
+        "group": "c1934b244a58cbcd",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "1",
+        "height": "4",
+        "gtype": "gauge-34",
+        "gstyle": "needle",
+        "title": "",
+        "alwaysShowTitle": false,
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": "0",
+        "sizeGap": "0",
+        "sizeKeyThickness": "12",
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "gen4gauge",
+        "x": 4200,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eeebbeb85197ecc8",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 17",
+        "links": [
+            "c76fe27ccb6fd037",
+            "bf4b9d24d246aee3",
+            "bad92bec208da393"
+        ],
+        "x": 4055,
+        "y": 1040,
+        "wires": [
+            [
+                "66930b5d8531b14f"
+            ]
+        ]
+    },
+    {
+        "id": "66930b5d8531b14f",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "c1934b244a58cbcd",
+        "name": "vpTempChart",
+        "label": "TEMPERATURE [°C] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "Temperature",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "s2_temperature",
+        "yAxisPropertyType": "property",
+        "ymin": "-40",
+        "ymax": "85",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ffffff",
+            "#f8f125",
+            "#ff0f0f",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "2",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4190,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "924e6ca62627cadf",
+        "type": "change",
+        "z": "74f0f072aba2913a",
+        "name": "getTemp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.col34",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2900,
+        "y": 500,
+        "wires": [
+            [
+                "525d1c944c4b007b"
+            ]
+        ]
+    },
+    {
+        "id": "525d1c944c4b007b",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "61399dcd2df1e6f6"
+        ],
+        "x": 3035,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1f6fdc412e295df8",
+        "type": "change",
+        "z": "74f0f072aba2913a",
+        "name": "getRPM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.col56",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2900,
+        "y": 540,
+        "wires": [
+            [
+                "5f070293bad0bbf3"
+            ]
+        ]
+    },
+    {
+        "id": "5f070293bad0bbf3",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [
+            "cb20dd623969d883"
+        ],
+        "x": 3035,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "cb20dd623969d883",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 18",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "5f070293bad0bbf3"
+        ],
+        "x": 3795,
+        "y": 1000,
+        "wires": [
+            [
+                "0544ef7e4883a870"
+            ]
+        ]
+    },
+    {
+        "id": "0544ef7e4883a870",
+        "type": "ui-text",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "11653f0fae161b2a",
+        "order": 2,
+        "width": "1",
+        "height": "4",
+        "name": "",
+        "label": "RPM",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": true,
+        "font": "",
+        "fontSize": "35",
+        "color": "#ffffff",
+        "wrapText": false,
+        "className": "",
+        "x": 3890,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "6b99dd54170d69f3",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 19",
+        "links": [
+            "c76fe27ccb6fd037",
+            "bf4b9d24d246aee3",
+            "bad92bec208da393"
+        ],
+        "x": 3795,
+        "y": 1040,
+        "wires": [
+            [
+                "59a061462ff89654"
+            ]
+        ]
+    },
+    {
+        "id": "59a061462ff89654",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "11653f0fae161b2a",
+        "name": "vpRPMChart",
+        "label": "RPM (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "RPM",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "rpm_2",
+        "yAxisPropertyType": "property",
+        "ymin": "0",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ffffff",
+            "#f8f125",
+            "#ff0f0f",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "2",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3910,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24dee64eb560f0ae",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 20",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3375,
+        "y": 1320,
+        "wires": [
+            [
+                "976d435b467605f9"
+            ]
+        ]
+    },
+    {
+        "id": "976d435b467605f9",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "d08c88db20226da9",
+        "name": "RMS (G) (probe 2)",
+        "label": "RMS Acceleration 2 [G] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "[\"x2_rms_ACC_G\",\"y2_rms_ACC_G\",\"z2_rms_ACC_G\"]",
+        "categoryType": "json",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "data",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#2095f2",
+            "#ffffff",
+            "#000000",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3530,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "081d75fa1257ebbd",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 21",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3885,
+        "y": 1320,
+        "wires": [
+            [
+                "c805dee08ffac0a4"
+            ]
+        ]
+    },
+    {
+        "id": "c805dee08ffac0a4",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "ddfc512b4a6c73df",
+        "name": "X - Velocity (mm/sec)  (probe 2)",
+        "label": "X - Velocity [mm/sec] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "z2_velocity_mm_sec",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "z2_velocity_mm_sec",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#2ca02c",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4050,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0fd5394412abb54",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 22",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3375,
+        "y": 1380,
+        "wires": [
+            [
+                "f1ef16a73945a8f0"
+            ]
+        ]
+    },
+    {
+        "id": "f1ef16a73945a8f0",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "a496ea282a46fac7",
+        "name": "MAX (G) (probe 2)",
+        "label": "MAX Acceleration [G] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "[\"x2_max_ACC_G\",\"y2_max_ACC_G\",\"z2_max_ACC_G\"]",
+        "categoryType": "json",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "data",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#2095f2",
+            "#ffffff",
+            "#000000",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "bezier",
+        "x": 3530,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17ea968836d683fe",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 23",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3375,
+        "y": 1440,
+        "wires": [
+            [
+                "1740d2535df65a08"
+            ]
+        ]
+    },
+    {
+        "id": "1740d2535df65a08",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "473c4ec0c93ca86f",
+        "name": "PEAK (Hz) (probe 2)",
+        "label": "Amplitude Peak [Hz] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "[\"x2_peak_one_Hz\",\"y2_peak_one_Hz\",\"z2_peak_one_Hz\",\"x2_peak_two_Hz\",\"y2_peak_two_Hz\",\"z2_peak_two_Hz\",\"x2_peak_three_Hz\",\"y2_peak_three_Hz\",\"z2_peak_three_Hz\"]",
+        "categoryType": "json",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "data",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#2095f2",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "bezier",
+        "x": 3540,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3982b468e4d0f98f",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 24",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3885,
+        "y": 1380,
+        "wires": [
+            [
+                "026273312a522def"
+            ]
+        ]
+    },
+    {
+        "id": "026273312a522def",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "246456e817215935",
+        "name": "Y - Velocity (mm/sec) (probe 2)",
+        "label": "Y - Velocity [mm/sec] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "y2_velocity_mm_sec",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y2_velocity_mm_sec",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#98df8a",
+            "#98df8a",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4050,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d55b9846ba3b062",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 25",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 3885,
+        "y": 1440,
+        "wires": [
+            [
+                "1ba8d3c318117ac5"
+            ]
+        ]
+    },
+    {
+        "id": "1ba8d3c318117ac5",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "d47dac8251b91244",
+        "name": "Z - Velocity (mm/sec) (probe 2)",
+        "label": "Z - Velocity [mm/sec] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "z2_velocity_mm_sec",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "z2_velocity_mm_sec",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#d62728",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4050,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "300f2447370a0773",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "b1e903e32269aa71",
+        "name": "X - Displacement (mm)(probe 2)",
+        "label": "X - Displacement [mm] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "x2_displacement_mm",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "x2_displacement_mm",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ff9694",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4470,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54ec94cb10fd4cff",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "029ec23ef73be07b",
+        "name": "Y - Displacement (mm) (probe 2)",
+        "label": "Y - Displacement [mm] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "y2_displacement_mm",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y2_displacement_mm",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#9467bd",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4480,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "050a0aa3839d851c",
+        "type": "ui-chart",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "47e67bb2414c9173",
+        "name": "Z - Displacement (mm) (probe 2)",
+        "label": "Z - Displacement [mm] (Probe 2)",
+        "order": 1,
+        "chartType": "line",
+        "category": "z2_displacement_mm",
+        "categoryType": "str",
+        "xAxisLabel": "",
+        "xAxisProperty": "received",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "z2_displacement_mm",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#c5b0d5",
+            "#ffffff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#ffffff"
+        ],
+        "textColorDefault": false,
+        "gridColor": [
+            "#707070"
+        ],
+        "gridColorDefault": false,
+        "width": "4",
+        "height": "4",
+        "className": "",
+        "interpolation": "smooth",
+        "x": 4470,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b5829f954a1ee45",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 26",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 4305,
+        "y": 1320,
+        "wires": [
+            [
+                "300f2447370a0773"
+            ]
+        ]
+    },
+    {
+        "id": "5d740b4a5ad85dc8",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 27",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 4305,
+        "y": 1380,
+        "wires": [
+            [
+                "54ec94cb10fd4cff"
+            ]
+        ]
+    },
+    {
+        "id": "62fd3fc728da800a",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 28",
+        "links": [
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037",
+            "bad92bec208da393"
+        ],
+        "x": 4305,
+        "y": 1440,
+        "wires": [
+            [
+                "050a0aa3839d851c"
+            ]
+        ]
+    },
+    {
+        "id": "4686c60121c8aa34",
+        "type": "change",
+        "z": "74f0f072aba2913a",
+        "name": "getODR2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.col33",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2900,
+        "y": 620,
+        "wires": [
+            [
+                "aea8bbd7b02663f6"
+            ]
+        ]
+    },
+    {
+        "id": "aea8bbd7b02663f6",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 9",
+        "mode": "link",
+        "links": [
+            "9a29db5ac04a0b6a"
+        ],
+        "x": 3035,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "9a29db5ac04a0b6a",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "name": "link in 29",
+        "links": [
+            "aea8bbd7b02663f6",
+            "96e5aa9dda89ea9d",
+            "bf4b9d24d246aee3",
+            "c76fe27ccb6fd037"
+        ],
+        "x": 3575,
+        "y": 1040,
+        "wires": [
+            [
+                "5f257f13b99c50b0"
+            ]
+        ]
+    },
+    {
+        "id": "0c29d08bb8ffbd9d",
+        "type": "change",
+        "z": "74f0f072aba2913a",
+        "name": "getODR2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2900,
+        "y": 660,
+        "wires": [
+            [
+                "aea8bbd7b02663f6"
+            ]
+        ]
+    },
+    {
+        "id": "3d5e816cc686e2cc",
+        "type": "function",
+        "z": "74f0f072aba2913a",
+        "name": "probe-validator",
+        "func": "if (!msg.fromLive) {\n    let type = flow.get(\"type_114\");\n    if(type == 110 || type == 114){\n        msg = {};\n        msg.ui_update = { \n            \"label\": \"\"\n        }\n        msg.enabled = false;\n        return msg;\n    } else if(type == 111){\n        msg = {};\n        msg.ui_update = { \n            \"label\": \"ODR 2:\"\n        }\n        msg.enabled = true;\n        return msg;\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2300,
+        "y": 720,
+        "wires": [
+            [
+                "96e5aa9dda89ea9d"
+            ]
+        ]
+    },
+    {
+        "id": "96e5aa9dda89ea9d",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 10",
+        "mode": "link",
+        "links": [
+            "9a29db5ac04a0b6a"
+        ],
+        "x": 2415,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "5f257f13b99c50b0",
+        "type": "ui-text",
+        "z": "74f0f072aba2913a",
+        "g": "33cfbcff7312a6e6",
+        "group": "6b4cfee43f267b82",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": true,
+        "font": "",
+        "fontSize": "16",
+        "color": "#ffffff",
+        "wrapText": false,
+        "className": "",
+        "x": 3670,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "ae6382c2c39d1710",
+        "type": "link in",
+        "z": "74f0f072aba2913a",
+        "g": "e61f949b39718963",
+        "name": "link in 13",
+        "links": [
+            "113fd8f10744898f"
+        ],
+        "x": 4385,
+        "y": 320,
+        "wires": [
+            [
+                "91131f71bf01b698"
+            ]
+        ]
+    },
+    {
+        "id": "a868714bee51b4aa",
+        "type": "link out",
+        "z": "74f0f072aba2913a",
+        "name": "link out 8",
+        "mode": "link",
+        "links": [
+            "9eb3395d3a8c2347"
+        ],
+        "x": 1065,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "f6f492c6fdb8c5d6",
+        "type": "function",
+        "z": "74f0f072aba2913a",
+        "name": "single-dual-ch",
+        "func": "let sensor_type = msg.payload.col5 || null;\nif(sensor_type == 110 || sensor_type == 114){\n    return [msg, null];\n} else if (sensor_type == 111){\n    return [null, msg];\n} else {\n    msg.payload.col33 = '--';\n    msg.payload.col0 = '--';\n    return [msg, msg];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2700,
+        "y": 540,
+        "wires": [
+            [
+                "cae9d8dbfd2a7aa8",
+                "5d4d25aed1553016",
+                "0c29d08bb8ffbd9d"
+            ],
+            [
+                "b66f017a24d49bf7",
+                "924e6ca62627cadf",
+                "1f6fdc412e295df8",
+                "4686c60121c8aa34",
+                "5d4d25aed1553016"
+            ]
+        ]
+    },
+    {
+        "id": "dd57661c5c7e8538",
+        "type": "file in",
+        "z": "74f0f072aba2913a",
+        "g": "1c1487df525464e4",
+        "name": "path",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 3930,
+        "y": 760,
+        "wires": [
+            [
+                "75ed8d32195e54d3"
+            ]
+        ]
+    },
+    {
+        "id": "75ed8d32195e54d3",
+        "type": "json",
+        "z": "74f0f072aba2913a",
+        "g": "1c1487df525464e4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4070,
+        "y": 760,
+        "wires": [
+            [
+                "27449de978af8cfc"
+            ]
+        ]
+    },
+    {
+        "id": "27449de978af8cfc",
+        "type": "template",
+        "z": "74f0f072aba2913a",
+        "g": "1c1487df525464e4",
+        "name": "config_results-to-pop-up-window",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<div class=\"diag_wrapper\">\n    <h3>Address: {{payload.addr}} | Last Heard: {{payload.lastHeard}}</h3>\n    <table>\n        <thead>\n            <tr>\n                <th>CONFIGURATION</th>\n                <th>VALUE</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td>Firmware Version</td>\n                <td>{{payload.firmware}}</td>\n            </tr>\n            <tr>\n                <td>Destination Address</td>\n                <td>{{payload.destination_address}}</td>\n            </tr>\n            <tr>\n                <td>Operation Mode</td>\n                <td>{{payload.mode}}</td>\n            </tr>\n            <tr>\n                <td>Output Data Rate (ODR) - Probe 1</td>\n                <td>{{payload.odr_1}}</td>\n            </tr>\n             <tr>\n                <td>Output Data Rate (ODR) - Probe 2</td>\n                <td>{{payload.odr_2}}</td>\n            </tr>\n            <tr>\n                <td>Sampling Duration - Probe 1</td>\n                <td>{{payload.sampling_duration_1}}</td>\n            </tr>\n            <tr>\n                <td>Sampling Duration - Probe 2</td>\n                <td>{{payload.sampling_duration_2}}</td>\n            </tr>\n            <tr>\n                <td>Filter Status</td>\n                <td>{{payload.filter_status}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Coefficient - Probe 1</td>\n                <td>{{payload.lpf_coeff_1}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Coefficient - Probe 2</td>\n                <td>{{payload.lpf_coeff_2}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Frequency - Probe 1</td>\n                <td>{{payload.lpf_freq_1}}</td>\n            </tr>\n            <tr>\n                <td>Low Pass Filter Frequency - Probe 2</td>\n                <td>{{payload.lpf_freq_2}}</td>\n            </tr>\n            <tr>\n                <td>High Pass Filter Coefficient - Probe 1</td>\n                <td>{{payload.hpf_coeff_1}}</td>\n            </tr>\n            <tr>\n                <td>High Pass Filter Coefficient - Probe 2</td>\n                <td>{{payload.hpf_coeff_2}}</td>\n            </tr>\n            <tr>\n                <td>High Pass Filter Frequency - Probe 1</td>\n                <td>{{payload.hpf_freq_1}}</td>\n            </tr>\n            <tr>\n                <td>High Pass Filter Frequency - Probe 2</td>\n                <td>{{payload.hpf_freq_2}}</td>\n            </tr>\n            <tr>\n                <td>Sampling Interval</td>\n                <td>{{payload.sampling_interval}}</td>\n            </tr>\n            <tr>\n                <td>On Request Timeout</td>\n                <td>{{payload.on_request_timeout}}</td>\n            </tr>\n            <tr>\n                <td>DeadBand</td>\n                <td>{{payload.deadband}}</td>\n            </tr>\n            <tr>\n                <td>Payload Length</td>\n                <td>{{payload.payload_length}}</td>\n            </tr>\n            <tr>\n                <td>Full Scale Range (FSR)</td>\n                <td>{{payload.fsr}}</td>\n            </tr>\n            <tr>\n                <td>RPM Compute Status</td>\n                <td>{{payload.rpm_compute_status}}</td>\n            </tr>\n            <tr>\n                <td>Auto Raw Destination Address</td>\n                <td>{{payload.auto_raw_destination_address}}</td>\n            </tr>\n            <tr>\n                <td>Auto Raw Interval</td>\n                <td>{{payload.auto_raw_interval}}</td>\n            </tr>\n            <tr>\n                <td>Smart Mode - Skip Count</td>\n                <td>{{payload.smart_mode_skip_count}}</td>\n            </tr>\n            <tr>\n                <td>Smart Mode - Acceleration Threshold - Probe 1</td>\n                <td>{{payload.smart_mode_acc_threshold_probe_1}}</td>\n            </tr>\n             <tr>\n                <td>Smart Mode - Acceleration Threshold - Probe 2</td>\n                <td>{{payload.smart_mode_acc_threshold_probe_2}}</td>\n            </tr>\n            <tr>\n                <td>Uptime Counter - Probe 1</td>\n                <td>{{payload.uptime_counter_probe_1}}</td>\n            </tr>\n            <tr>\n                <td>Uptime Counter - Probe 2</td>\n                <td>{{payload.uptime_counter_probe_2}}</td>\n            </tr>\n            <tr>\n                <td>Max Transmission Raw Samples</td>\n                <td>{{payload.max_tx_raw_samples}}</td>\n            </tr>\n            <tr>\n                <td>Motion to Sampling Delay</td>\n                <td>{{payload.motion_to_sampling_delay}}</td>\n            </tr>\n            <tr>\n                <td>Max Number of Motion Transmission Per Interval</td>\n                <td>{{payload.max_num_of_motion_tx_per_interval}}</td>\n            </tr>\n            <tr>\n                <td>Hardware ID</td>\n                <td>{{payload.hardware_id}}</td>\n            </tr>\n            <tr>\n                <td>Reserved</td>\n                <td>{{payload.reserved}}</td>\n            </tr>\n            <tr>\n                <td>Transmission Lifetime Counter</td>\n                <td>{{payload.tx_lifetime_counter}}</td>\n            </tr>\n            <tr>\n                <td>RSSI</td>\n                <td>{{payload.rssi}}</td>\n            </tr>\n        </tbody>\n    </table>\n</div>",
+        "output": "str",
+        "x": 4370,
+        "y": 760,
+        "wires": [
+            [
+                "94ebd5ae11609e4f"
             ]
         ]
     },
@@ -5030,7 +6496,7 @@
             "e4f53f54fcfc2273"
         ],
         "x": 3334,
-        "y": 59,
+        "y": 39,
         "w": 1292,
         "h": 82
     },
@@ -5094,14 +6560,39 @@
             "7b7fc642ea8c0de8",
             "e9a6e04941f9686d",
             "a36220971adc5841",
-            "ac19857639bd2943",
-            "90bd54a3e02f434d",
-            "9eb3395d3a8c2347"
+            "61399dcd2df1e6f6",
+            "7601be67da67205e",
+            "eeebbeb85197ecc8",
+            "66930b5d8531b14f",
+            "cb20dd623969d883",
+            "0544ef7e4883a870",
+            "6b99dd54170d69f3",
+            "59a061462ff89654",
+            "24dee64eb560f0ae",
+            "976d435b467605f9",
+            "081d75fa1257ebbd",
+            "c805dee08ffac0a4",
+            "f0fd5394412abb54",
+            "f1ef16a73945a8f0",
+            "17ea968836d683fe",
+            "1740d2535df65a08",
+            "3982b468e4d0f98f",
+            "026273312a522def",
+            "8d55b9846ba3b062",
+            "1ba8d3c318117ac5",
+            "300f2447370a0773",
+            "54ec94cb10fd4cff",
+            "050a0aa3839d851c",
+            "2b5829f954a1ee45",
+            "5d740b4a5ad85dc8",
+            "62fd3fc728da800a",
+            "9a29db5ac04a0b6a",
+            "5f257f13b99c50b0"
         ],
         "x": 3334,
-        "y": 699,
+        "y": 879,
         "w": 1312,
-        "h": 402
+        "h": 602
     },
     {
         "id": "e61f949b39718963",
@@ -5147,12 +6638,15 @@
             "395e74579496fe30",
             "54434242db8b9ea2",
             "bf12f03f7168b2be",
-            "e9e9fd86e2f4566c"
+            "ae6382c2c39d1710",
+            "90bd54a3e02f434d",
+            "ac19857639bd2943",
+            "9eb3395d3a8c2347"
         ],
         "x": 3334,
-        "y": 219,
+        "y": 179,
         "w": 1312,
-        "h": 422
+        "h": 462
     },
     {
         "id": "1c1487df525464e4",
@@ -5173,12 +6667,15 @@
             "4a07a32a3ab1b433",
             "04949fc80df81808",
             "887fcddec623ab75",
-            "67b55719c81956dd"
+            "67b55719c81956dd",
+            "dd57661c5c7e8538",
+            "75ed8d32195e54d3",
+            "27449de978af8cfc"
         ],
         "x": 3334,
-        "y": 1159,
+        "y": 679,
         "w": 1312,
-        "h": 142
+        "h": 162
     },
     {
         "id": "63c8e31dd0194b68",
@@ -5251,7 +6748,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "3",
         "height": 1,
-        "order": 8,
+        "order": 6,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5279,7 +6776,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 9,
+        "order": 11,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5293,7 +6790,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 10,
+        "order": 13,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5307,7 +6804,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 11,
+        "order": 15,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5321,7 +6818,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 12,
+        "order": 17,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5335,7 +6832,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 13,
+        "order": 19,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5349,7 +6846,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 14,
+        "order": 21,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5363,7 +6860,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 15,
+        "order": 23,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5377,7 +6874,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 16,
+        "order": 25,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5391,7 +6888,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "4",
         "height": 1,
-        "order": 17,
+        "order": 27,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5405,7 +6902,7 @@
         "page": "3c148a5ec9b4b2b7",
         "width": "3",
         "height": 1,
-        "order": 6,
+        "order": 9,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -5474,6 +6971,160 @@
         "groupType": "default"
     },
     {
+        "id": "c1934b244a58cbcd",
+        "type": "ui-group",
+        "name": "gen4Temperature2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "3",
+        "height": 1,
+        "order": 8,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "11653f0fae161b2a",
+        "type": "ui-group",
+        "name": "gen4RPM2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "3",
+        "height": 1,
+        "order": 10,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d08c88db20226da9",
+        "type": "ui-group",
+        "name": "gen4ACCGroup_x2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 12,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ddfc512b4a6c73df",
+        "type": "ui-group",
+        "name": "gen4VelDisplGroup_x2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 14,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a496ea282a46fac7",
+        "type": "ui-group",
+        "name": "gen4ACCGroup_y2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 18,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "473c4ec0c93ca86f",
+        "type": "ui-group",
+        "name": "gen4ACCGroup_z2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 24,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "246456e817215935",
+        "type": "ui-group",
+        "name": "gen4VelDisplGroup_y2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 20,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d47dac8251b91244",
+        "type": "ui-group",
+        "name": "gen4VelDisplGroup_z2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 26,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "b1e903e32269aa71",
+        "type": "ui-group",
+        "name": "gen4OneTwoThreeGroup_x2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 16,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "029ec23ef73be07b",
+        "type": "ui-group",
+        "name": "gen4OneTwoThreeGroup_y2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 22,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "47e67bb2414c9173",
+        "type": "ui-group",
+        "name": "gen4OneTwoThreeGroup_z2",
+        "page": "3c148a5ec9b4b2b7",
+        "width": "4",
+        "height": 1,
+        "order": 28,
+        "showTitle": false,
+        "className": "",
+        "visible": false,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
         "id": "e01eadf35316cb83",
         "type": "ui-theme",
         "name": "ncdTheme",
@@ -5496,16 +7147,16 @@
         "type": "subflow:74f0f072aba2913a",
         "z": "8d6c340fe8b3848d",
         "name": "",
-        "x": 520,
-        "y": 160,
+        "x": 560,
+        "y": 480,
         "wires": []
     },
     {
-        "id": "490bdc529fea13db",
+        "id": "21046febbf0a3571",
         "type": "global-config",
         "env": [],
         "modules": {
-            "@flowfuse/node-red-dashboard": "1.26.0"
+            "@flowfuse/node-red-dashboard": "1.28.0"
         }
     }
 ]
